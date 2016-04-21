@@ -1,0 +1,15 @@
+\section{Introduction}
+%--------------------------------------------------------------------------------------
+\subsection{The SKA}\label{sec:ska}
+%--------------------------------------------------------------------------------------
+\subsection{Image Capturing}\label{sec:img}
+%--------------------------------------------------------------------------------------
+\subsection{Errors in the Image}\label{sec:err}
+%--------------------------------------------------------------------------------------
+\begin{figure}[H]
+	\centering
+	\label{img:beam}
+	\includegraphics[scale=0.28]{Images/beam.png}
+	\caption{Primary Beam Focus Pattern\cite{oleg}}
+\end{figure}
+%--------------------------------------------------------------------------------------

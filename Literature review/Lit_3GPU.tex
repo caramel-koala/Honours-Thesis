@@ -1,0 +1,34 @@
+\section{GPU Architecture and Concepts}\label{gpu}
+%--------------------------------------------------------------------------------------
+\subsection{Parallelism}\label{gpu:sec:par}
+One of the main means of optimizing processing is through parallelism. The two main forms of parallelism are task and data parallelism. Task parallelism can be seen as running multiple processes concurrently where communication between the processes is explicitly defined to avoid race conditions. Data parallelism is the distribution of a data set over a number of identical processes each of which performs operations on a unique subset of the data. Race conditions occur when parallel processing streams access data or perform operations out of the intended order, leading to errors or incorrect output being produced. A combination of task and data parallelism can lead to an ideal speed-up, but both have their limits depending on the task and the data being operated on \cite{subhlok1993exploiting}.
+\\
+\\
+The increased need for parallelism came in about 2005, when CPU frequency peaked at 4GHz due to heat dissipation issues. However, Moore's Law still holds, and is still expected to hold until 2025; that is, that the number of transistors for a computer will double every two years. This leads to a problem where the speed at which an operation is done cannot be increased (due to the frequency limit), but the number of concurrent operations can still increase. This means that the only way to speed up an operation is to change it from a sequential to a parallel process \cite{rajan2013informatics}.
+%--------------------------------------------------------------------------------------
+\subsection{GPU Optimization}\label{gpu}
+GPU's were originally designed for rendering pixels and vectors in games. They were especially designed for this since CPU's are optimized to run sequential instructions as fast as possible; whereas pixel and vector calculations are inherently parallel. With NVIDIA's release of CUDA in 2006, general purpose GPU (GPGPU) programming became common place as a way to accelerate data processing through data parallelism and task parallelism through the simultaneous execution of similar task \cite{nvidia_cuda}.
+\\
+\\
+The power of GPU's come from its architecture which is optimized for a special case of SIMD (Single Instruction Multiple Data) processing known as SMIT (Single Instruction Multiple Threads). SIMD allows a central processor to distribute a set of instructions to multiple simple processors which then act on the data simultaneously. SIMT is more generalized as each thread of the GPU can perform different tasks given the same set of instructions. This is due to the way in which the GPU handles branching at the thread level. By exploiting these processes, and this instructional architecture, some instructions can be computed in faster time than that of a CPU \cite{vuduc2013brief}
+%--------------------------------------------------------------------------------------
+\subsection{Physical Structure and Specifications}\label{gpu:sec:str}
+%--------------------------------------------------------------------------------------
+\subsection{GPU Memory}\label{gpu:sec:mem}
+%
+\subsubsection{Registry Memory}\label{gpu:ssec:reg}
+%
+\subsubsection{Cache}\label{gpu:ssec:cache}
+%
+\subsubsection{Global Memory}\label{gpu:ssec:gm}
+%
+\subsubsection{Shared Memory}\label{gpu:ssec:sm}
+%
+\subsubsection{Constant Memory}\label{gpu:ssec:cm}
+%
+\subsubsection{Texture Memory}\label{gpu:ssec:tm}
+%--------------------------------------------------------------------------------------
+\subsection{GPU Processing}\label{gpu:sec:proc}
+%
+\subsubsection{Threads}\label{gpu:ssec:thr}
+%--------------------------------------------------------------------------------------
