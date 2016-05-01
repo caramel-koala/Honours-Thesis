@@ -12,7 +12,7 @@
 	howpublished 	= "\url{https://www.skatelescope.org/3rd-generation-calibration-skaenews-july2015/}",
 }
 
-@MISC{oleg,
+@misc{oleg,
   author        	= "Oleg Smirnov",
   note          	= {SKA Chair at Rhodes Centre for Radio Astronomy Techniques \& Technologies},
   date          	= "2016-02-23",
@@ -89,19 +89,5 @@
 	author 		= {{NVIDIA}},
 	note 	    	= "Accessed on: 26/04/2016",
 	howpublished 	= "\url{http://international.download.nvidia.com/geforce-com/international/pdfs/GeForce-GTX-750-Ti-Whitepaper.pdf}",
-}
-
-@MISC{GM107,
-	title 		= {{MSI GTX 750 Ti Gaming Video Card Review}},
-	author 		= {{George Cella}},
-	note 	    	= "Accessed on: 27/04/2016",
-	howpublished 	= "\url{http://www.hitechlegion.com/reviews/graphics/38752-msi-gtx-750-ti-gaming-video-card-review?start=2}",
-}
-
-@MISC{GM107SMM,
-	title 		= {{NVIDIA GeForce GTX 750 Ti 2GB Video Card Review}},
-	author 		= {{Nathan Kirsch}},
-	note 	    	= "Accessed on: 27/04/2016",
-	howpublished 	= "\url{http://www.legitreviews.com/nvidia-geforce-gtx-750-ti-2gb-video-card-review_135752/2}",
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
