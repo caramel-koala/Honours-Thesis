@@ -18,19 +18,19 @@ The power of GPU's come from its architecture which is optimized for a special c
 The NVIDIA GeForce GTX 750 Ti GPU was released on the 18th of February 2014. It boasts 640 CUDA cores, 1020 MHz base clock speed, 1305.6 GFLOPs and a memory bandwidth of 86.4 GB/sec. It is NVIDIA's first-generation Maxwell architecture, designed for high performance at relatively low power consumption (60 W) and has the codename 'GM107'. The GPU uses PCI Express 3.0 to interface with the host machine through the GigaThread engine. The first-generation Maxwell (from now simply referred to as Maxwell) is made up of one Graphics Processing Cluster (GPC) on which the processing occurs. It also contains a large L2 cache at 2048 KB and two 64-bit memory controllers to access the 2048 MB global memory. This design can be seen in Figure \ref{gpu:img:gm107} (\cite{geforce_750}, \cite{g750_specs}, \cite{g750_paper}).
 %
 \subsubsection{Streaming Multiprocessors}\label{gpu:ssec:smm}
-The GPC is further broken down into five Streaming Multiprocessors(SM) which are further divided into four processing blocks. The processing blocks each contain an instruction buffer, a scheduler and 32 CUDA cores as seen in Figure \ref{gpu:img:smm} (\cite{GM107SMM}). These warps are set in a lock step, meaning each core in a warp executes the same command, with different valued variable.
+The GPC is further broken down into five Streaming Multiprocessors(SM) which are further divided into four processing blocks. The processing blocks each contain an instruction buffer, a scheduler and 32 CUDA cores as seen in Figure \ref{gpu:img:smm} (\cite{GM107SMM}). These warps are set in a lock step, meaning each core in a warp executes the same set of commands at the same time, with different valued variable.(\cite{CUDA_DEVKIT}
 %
 \begin{figure}[H]
  \centering
  \includegraphics[width=0.7\textwidth]{Images/GM107.jpg}
- \caption{NVIDIA Maxwell Architecture\cite{GM107}}
+ \caption{NVIDIA Maxwell Architecture(\cite{GM107})}
  \label{gpu:img:gm107}
 \end{figure}
 %
 \begin{figure}[H]
 \centering
  \includegraphics[width=0.4\textwidth]{Images/GM107SMM.png}
- \caption{Maxwell Streaming Multiprocessor\cite{GM107SMM}}
+ \caption{Maxwell Streaming Multiprocessor(\cite{GM107SMM})}
  \label{gpu:img:smm}
 \end{figure}
 %--------------------------------------------------------------------------------------
