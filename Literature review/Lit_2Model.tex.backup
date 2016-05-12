@@ -55,17 +55,23 @@ Part of achieving this efficiency is assuming $P$ is co-lexicographically ordere
 \begin{equation}
   \phi(x(s),y(s)) = (x(s) + r(s), y(s))
 \end{equation}
-Where $r_i(s)$ is defined as the distance to the seed point $p_i \in P$ and $r(s) = min\{r_i(s) | 1 \leq i \leq n-1\}$, is the distance to the closest seed point to $s$. This transform can then easily be reversed to re-obtain $S$ and its set of Voronoi tessellations. Now, for the transform of $S$, $\phi(S)$ denoted by $\Phi$, the left-most point of each Voronoi Region is its seed point (except the left-most seed point), this is essential for the algorithm. It is important to note that the perpendicular bisectors of seed points in $S$, through the transform, become hyperbola in $\Phi$ (provided they are not horizontal in $S$). For $p_i,p_j\in P$, the hyperbola is denoted as $h_{ij}$ which can be split into $h^+_{ij}$ and $h^-_{ij}$ as the upper and lower parts about the left-most point respectively. Set $Q$ is denoted as the set of all event points in the algorithm. $Q$ is initially populated with the seed points (in co-lexicographical order) but the hyperbolic half-lines will be added as they are found. The algorithm, as described by \cite{okabe2009spatial} goes as follows:
+Where $r_i(s)$ is defined as the distance to the seed point $p_i \in P$ and $r(s) = min\{r_i(s) | 1 \leq i \leq n-1\}$, is the distance to the closest seed point to $s$. This transform can then easily be reversed to re-obtain $S$ and its set of Voronoi tessellations. Now, for the transform of $S$, $\phi(S)$ denoted by $\Phi$, the left-most point of each Voronoi Region is its seed point (except the left-most seed point), this is essential for the algorithm. It is important to note that the perpendicular bisectors of seed points in $S$, through the transform, become hyperbola in $\Phi$ (provided they are not horizontal in $S$). For $p_i,p_j\in P$, the hyperbola is denoted as $h_{ij}$ which can be split into $h^+_{ij}$ and $h^-_{ij}$ as the upper and lower parts about the left-most point respectively. Set $Q$ is denoted as the set of all event points in the algorithm. $Q$ is initially populated with the seed points (in co-lexicographical order) but the hyperbolic half-edges will be added as they are found. The algorithm, as described by \cite{okabe2009spatial} goes as follows:
 \begin{enumerate}
 \item Add $P$ to $Q$
 \item Choose and delete the leftmost seed point from $Q$
-\item While $Q$ is not empty repeat steps \ref{tes:itm:for:qst} to \ref{tes:itm:for:qed}
+\item While $Q$ is not empty repeat steps \ref{tes:itm:for:w}, \ref{tes:itm:for:seed} and \ref{tes:itm:for:line}.
 \begin{enumerate}
-  \item\label{tes:itm:for:qst}
-  
-  \item\label{tes:itm:for:qed}
+  \item\label{tes:itm:for:w} Choose and delete the leftmost element, $w$ of $Q$
+  \item\label{tes:itm:for:seed} If $w$ is a seed point:
+  \begin{enumerate}
+    \item Set $w=p_i$
+    
+  \end{enumerate}
+  \item\label{tes:itm:for:line} If $w$ is a half-edge:
+  \begin{enumerate}
+    \item 
+  \end{enumerate}
 \end{enumerate}
-
 \end{enumerate}
 
 %--------------------------------------------------------------------------------------

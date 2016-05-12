@@ -1,15 +1,31 @@
-\section{Introduction}
+\section{Radio Astronomy}\label{int}
 %--------------------------------------------------------------------------------------
-\subsection{The SKA}\label{sec:ska}
+\subsection{History}\label{int:sec:his}
+\\
+\\
+The SKA project was launched in order to create the world's largest array of radio telescopes. This will be achieved by having 197 radio telescopes situated in South Africa and Australia working together and covering an area close to one square kilometre. The array is set to have a resolution of over 50 times that of the Hubble Space Telescope while still covering massive areas of the sky (\cite{SKAsite}).
 %--------------------------------------------------------------------------------------
-\subsection{Image Capturing}\label{sec:img}
+\subsection{Radio Telescopes}\label{int:sec:rt}
+%
+\subsubsection{Design}
+%
+\subsubsection{The Primary Beam}
+The primary beam is a mathematical function that describes the sensitivity pattern of an antenna. Naturally the beam is most sensitive in the centre of the direction in which it is facing, with fringes of sensitivity radiating out as can be seen in Figure \ref{int:fig:beam}. The circular sensitivity present in Figure \ref{int:fig:beam} is also due to the fact that the telescope rotates in order to keep the centre of the beam focused on the same area of the sky. The errors produced by the lack of sensitivity in certain areas can be compensated for, but that lies outside the scope of this paper (\citet{oleg}).
 %--------------------------------------------------------------------------------------
-\subsection{Errors in the Image}\label{sec:err}
+\subsection{Image Processing}\label{int:sec:img}
+%
+\subsubsection{Methods}
+%
+\subsubsection{Errors}
+%
+\subsubsection{Error Correction}
+%--------------------------------------------------------------------------------------
+\subsection{}\label{int:sec:err}
 %--------------------------------------------------------------------------------------
 \begin{figure}[H]
 	\centering
-	\label{img:beam}
+	\label{int:fig:beam}
 	\includegraphics[scale=0.28]{Images/beam.png}
-	\caption{Primary Beam Focus Pattern\cite{oleg}}
+	\caption{Primary Beam Focus Pattern(\cite{oleg})}
 \end{figure}
 %--------------------------------------------------------------------------------------
