@@ -50,7 +50,7 @@ The thread is the smallest processing unit of the GPU. GPU threads are designed 
 %
 \subsubsection{Blocks}\label{soft:ssec:block}
 Each block may have a maximum of 2056 threads in total and 1024 for any single dimension, hence why they are bundled into a larger, three dimensional grid structure. Similarly to threads, blocks have a unique three dimensional ID in the grid. Blocks exist such that each step of the processes execute simultaneously. This is done as, more often than not, blocks exchange data within their threads and if this precaution is not taken, race conditions could ensue to break the code. Each block, when executing, must occupy a whole number of warps (rounded up). This is done as warps are constantly in lock step. Threads within a block share a fast memory, located in the L1 cache of the streaming multiprocessor. This shared memory must be preallocated when the kernel is called as a third parameter within the kernel launch (parameters within the triple angle brackets) (\cite{CUDA_DEVKIT}).
-%--------------------------------------------------------------------------------------
-\subsection{CUDA Optimization}\label{gpu:sec:cop}
+%
+\subsubsection{CUDA Optimization}\label{gpu:ssec:cop}
 %--------------------------------------------------------------------------------------
 \subsection{Related Works}\label{gpu:sec:rel}
