@@ -3,13 +3,13 @@
 \subsection{Voronoi Tessellations}\label{tes:sec:vor}
 A Voronoi Diagram is a partitioning of a space $S$ by a set of points. Given $n$ points (seed points) the the space, $P = \{p_0,p_2,...,p_{n-1}\}, P \subset S$, is partitioned into $n$ regions, known as Voronoi Regions or Voronoi Cell, where every point, $s \in S_i,0 \leq i \leq n-1$ in a region, $S_i \subset S$, is closest to a single seed point, $p_i \in P$, in terms of the space's distance measurement operation, $d$ (\cite{okabe2009spatial}). An example of a Voronoi Diagram can be seen in Figure \ref{tes:fig:voreg}.
 %
-%\subsubsection{Weighted Voronoi Tessellations}\label{tes:ssec:wei}
+\subsubsection{Weighted Voronoi Tessellations}\label{tes:ssec:wei}
 %
-%\subsubsection{Voronoi Tessellations in Non-Euclidean Spaces}\label{tes:ssec:warp}
+\subsubsection{Voronoi Tessellations in Non-Euclidean Spaces}\label{tes:ssec:warp}
 %
 \begin{figure}[H]
     \centering
-    %\includegraphics[scale=0.65]{Images/voronoi.jpg}
+    \includegraphics[scale=0.65]{Images/voronoi.jpg}
     \caption{Voronoi Diagram(\cite{voronoipic})}
     \label{tes:fig:voreg}
 \end{figure}
@@ -88,14 +88,15 @@ Where $r_i(s)$ is defined as the distance to the seed point $p_i \in P$ and $r(s
 %
 \subsubsection{K-Means Algorithm}\label{tes:ssec:kma}
 %--------------------------------------------------------------------------------------
-\subsection{Related Work: Standard Voronoi Faceting}\label{ra:ssec:svf}
-In \citep{tasse2014applying} and \citep{smirnov2015radio}, a series of simulated extragalactic points are clustered into facets using a voronoi tessellation algorithm, the seed points for these facets are determined using a K-means algorithm. Another example of this can be seen in Figure \ref{tes:fig:stelvor} where the facets are superimposed over the source image from which they are derived.
+\subsection{Related Work}\label{ra:sec:rw}
+%
+\subsubsection{Standard Voronoi Faceting}\label{ra:ssec:svf}
+In \cite{tasse2014applying}, \cite{smirnov2015radio} and \cite{van2016lofar}, a series of simulated extragalactic points are clustered into facets using a voronoi tessellation algorithm, the seed points for these facets are set as the brightest points in each facet. Another example of this can be seen in Figure \ref{tes:fig:stelvor} where the facets are superimposed over the source image from which they are derived.
 %
 \begin{figure}[H]
     \centering
-    %\includegraphics[scale=0.65]{Images/voronoi.jpg}
+    \includegraphics[scale=0.4]{Images/tesselation.png}
     \caption{Example of Voronoi Faceting to group Extragalactic points for DD-calibration \citep{oleg}}
     \label{tes:fig:stelvor}
 \end{figure}
-
 %--------------------------------------------------------------------------------------
