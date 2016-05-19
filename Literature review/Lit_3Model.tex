@@ -4,7 +4,7 @@
 A Voronoi Diagram is a partitioning of a space $S$ by a set of points. Given $n$ points (seed points) the the space, $P = \{p_0,p_2,...,p_{n-1}\}, P \subset S$, is partitioned into $n$ regions, known as Voronoi Regions or Voronoi Cell, where every point, $s \in S_i,0 \leq i \leq n-1$ in a region, $S_i \subset S$, is closest to a single seed point, $p_i \in P$, in terms of the space's distance measurement operation, $d$ (\cite{okabe2009spatial}). An example of a Voronoi Diagram can be seen in Figure \ref{tes:fig:voreg}.
 %
 \subsubsection{Weighted Voronoi Tessellations}\label{tes:ssec:wei}
-The basic form of the voronoi tessellation has the seed points as being indistinguishable from one another, other than their different positions in the space. An extension of the tessellation is to break this rule and to have the seeds have some bias or weighting associated with them, this weighting can affect $d$ in different ways, depending on how the weighting is accounted for. Some of these methods, as stated in \cite{okabe2009spatial} include multiplicative, additive, compound and power voronoi diagrams. These diagrams have distance operators described as $d_M$, $d_A$, $d_C$, $d_P$ respectively.
+The basic form of the voronoi tessellation has the seed points as being indistinguishable from one another, other than their different positions in the space. An extension of the tessellation is to break this rule and to have the seeds have some bias or weighting associated with them. These weightings can represent a property of the data, for example, in terms of radio interferometry, they can represent the intensity of each source detected. This weighting can affect $d$ in different ways, depending on how the weighting is accounted for, this is know as the ``weighted distance''. Some of these methods, as stated in \cite{okabe2009spatial} include multiplicative, additive, compound and power voronoi diagrams. These diagrams have distance operators described as $d_M$, $d_A$, $d_C$, $d_P$ respectively.
 %
 \begin{equation}
 \begin{align}
@@ -15,11 +15,20 @@ The basic form of the voronoi tessellation has the seed points as being indistin
 \end{align}
 \end{equation}
 %
+Problems arise in attempting to compute the tessellations for the multiplicative, additive and compound voronoi diagrams as the edges of these diagrams, could potentially be curved by circular arc ($d_M$,$d_C$), a hyperbolic arc ($d_A$,$d_C$) or a fourth order polynomial arc ($d_C$) \citep{okabe2009spatial}. This leaves the power diagram as the only voronoi diagram which enforces that the edges be straight lines and the resulting tessellation be a convex polygon, similar to the standard Euclidean voronoi diagram. For the power diagram, if the weighting is equal for all points, the resulting diagram is the same as that of a standard Euclidean voronoi diagram. It is possible, and common, in the power diagram, that a seed point will not have its own associated voronoi polygon. This occurs when two seed points ($p_i,p_j \in P$, $w_i<w_j$, $i\neq j$) are close enough together such that the weighted bisector, defined by 
+%
+\begin{equation}
+ b(p_i,p_j) = \frac{1}{2}(||\bold{x}_i||^2-||\bold{x}_j||^2+w_i-w_j) \qquad \bold{x}_i = (x_i,y_i)
+\end{equation}
+%
+does not lie on the line segment $\bar{p_ip_j}$. When this occurs, $p_i$ lies in the region of $V_j$.
+%
 \subsubsection{Voronoi Tessellations in Non-Euclidean Spaces}\label{tes:ssec:warp}
+
 %
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.65]{Images/voronoi.jpg}
+    %\includegraphics[scale=0.65]{Images/voronoi.jpg}
     \caption{Voronoi Diagram(\cite{voronoipic})}
     \label{tes:fig:voreg}
 \end{figure}
@@ -101,11 +110,11 @@ Where $r_i(s)$ is defined as the distance to the seed point $p_i \in P$ and $r(s
 \subsection{Related Work}\label{ra:sec:rw}
 %
 \subsubsection{Standard Voronoi Faceting}\label{ra:ssec:svf}
-In \cite{tasse2014applying}, \cite{smirnov2015radio} and \cite{van2016lofar}, a series of simulated extragalactic points are clustered into facets using a voronoi tessellation algorithm, the seed points for these facets are set as the brightest points in each facet. Another example of this can be seen in Figure \ref{tes:fig:stelvor} where the facets are superimposed over the source image from which they are derived.
+In \cite{tasse2014applying}, \cite{smirnov2015radio} and \cite{van2016lofar}, a series of observed extragalactic points are clustered into facets using a voronoi tessellation algorithm, the seed points for these facets are set as the brightest points in each facet. Another example of this can be seen in Figure \ref{tes:fig:stelvor} where the facets are superimposed over the source image from which they are derived.
 %
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.4]{Images/tessellation.png}
+    %\includegraphics[scale=0.4]{Images/tessellation.png}
     \caption{Example of Voronoi Faceting to group Extragalactic points for DD-calibration \citep{oleg}}
     \label{tes:fig:stelvor}
 \end{figure}
