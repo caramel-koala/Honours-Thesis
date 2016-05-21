@@ -27,11 +27,12 @@
   howpublished 		= "\url{https://www.skatelescope.org/3rd-generation-calibration-skaenews-july2015/}",
 }
 
-@MISC{oleg,
-  author        	= "Oleg Smirnov",
-  note          	= {SKA Chair at Rhodes Centre for Radio Astronomy Techniques \& Technologies},
+@MISC{tasse2016tessellation,
+  author        	= "Cyril Tasse",
+  title			= "DDFacet imager",
+  note          	= {Paper in progress},
   year          	= {2016},
-  howpublished  	= "Personal Communication"
+  howpublished  	= "TBD"
 }
 
 @article{smirnov2015radio,
@@ -59,6 +60,16 @@
   volume		= {108},
   pages			= {585--594},
   year			= {1994}
+}
+
+@article{smirnov2011revisiting,
+  title			= {Revisiting the radio interferometer measurement equation-I. A full-sky Jones formalism},
+  author		= {Smirnov, Oleg M},
+  journal		= {Astronomy \& Astrophysics},
+  volume		= {527},
+  pages			= {A106},
+  year			= {2011},
+  publisher		= {EDP Sciences}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %3 Models and Algorithms
@@ -149,6 +160,31 @@
   pages			= {525--526},
   year			= {2000},
   organization		= {Boston}
+}
+
+@book{way2012advances,
+  title			= {Advances in machine learning and data mining for astronomy},
+  author		= {Way, Michael J and Scargle, Jeffrey D and Ali, Kamal M and Srivastava, Ashok N},
+  year			= {2012},
+  publisher		= {CRC Press}
+}
+
+@inproceedings{arthur2007k,
+  title			= {k-means++: The advantages of careful seeding},
+  author		= {Arthur, David and Vassilvitskii, Sergei},
+  booktitle		= {Proceedings of the eighteenth annual ACM-SIAM symposium on Discrete algorithms},
+  pages			= {1027--1035},
+  year			= {2007},
+  organization		= {Society for Industrial and Applied Mathematics}
+}
+
+@inproceedings{hamerly2010making,
+  title			= {Making k-means Even Faster.},
+  author		= {Hamerly, Greg},
+  booktitle		= {SDM},
+  pages			= {130--140},
+  year			= {2010},
+  organization		= {SIAM}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %4 Parallelism and GPUs

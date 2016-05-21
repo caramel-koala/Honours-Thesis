@@ -106,11 +106,31 @@ Where $r_i(s)$ is defined as the distance to the seed point $p_i \in P$ and $r(s
 It may be the case that the number of potential seed points in a space, $N_p=||P||$, is much larger than the optimal number of facets, $N_v$. In these cases it would reduce the overall computation time drastically if the $N_p$ points were grouped into $N_v$ clusters. From each of these clusters, a point is then chosen as a seed point to be used to find the corresponding Voronoi Tessellation. Some key examples of such clustering algorithms are described in this subsection.
 %
 \subsubsection{K-Means Algorithm}\label{tes:ssec:kma}
-k-means clustering is an iterative process where an initial guess at the center of a cluster, $c$, is guessed at and improved with each iteration. It is named as such because it seeks to separate $n$ objects into $k$ cluster where, for each object in a cluster $( o^i \in C_i$, $i \in \mathbb{R}$, $0\leq<i<k-1)$ the mean point of that cluster, $c_i$, is closer to it than any other mean point and the $c_i$ is representative of the average value of all points, $\frac{1}{m}\sum^m_{j=1}o^i_j$, in $C_i$. \cite{way2012advances} describes the algorithm as follows
+K-means clustering is an iterative process where an initial guess at the center of a cluster, $c$, is guessed at and improved with each iteration. It is named as such because it seeks to separate $n$ objects into $k$ cluster where, for each object in a cluster $( o^i \in C_i$, $i \in \mathbb{R}$, $0\leq<i<k-1)$ the mean point of that cluster, $c_i$, is closer to it than any other mean point and the $c_i$ is representative of the average value of all points, $\frac{1}{m}\sum^m_{j=1}o^i_j$, in $C_i$. \cite{way2012advances} describes the algorithm as follows:
 \begin{enumerate}
-  \item	Randomly choose $k$ mean points $(c_0,\dots,c_{k-1}$ and assign each an empty object set, $C_i$.
+  \item	Randomly choose $k$ mean points $(c_0,\dots,c_{k-1})$
+  \item\label{tes:itm:km} Assign each $c_i$ an empty object set, $C_i$.
   \item Iterate through all the objects in the space $(o_0,\dots,o_{n-1})$ and assign it to the object set of the mean point closest to it.
-  \item 
+  \item Set all $c_i$ to be the average of all points in their respective $C_i$.
+  \item If the sum of the changes in $c_i$, $\sum_0^{k-1} \Delta c_i$, is greater than some given tolerance, $\epsilon$, then repeat from Step \ref{tes:itm:km}, else return the set of means (and their object sets if 	      necessary).
+\end{enumerate}
+One obvious problem with this problem is the number of iterations can be unpredictable, this is addressed by having the sum of changes only converge to $\epsilon$, instead of complete convergence. With large data sets and large $k$-values where the mean points converge in smaller steps with every iteration, this can help drastically reduce the runtime of the algorithm. The clusters produced are also dependent on the initial placement of the mean points \citep{way2012advances}. Other methods of improving the runtime include probabilistic choices of starting mean points \citep{arthur2007k} and constraining the distance and using the triangle inequality \citep{hamerly2010making}.
+%
+\subsubsection{Bisecting K-Means Algorithm}\label{tes:ssec:bkma}
+A variation on the k-means algorithm is to embed it into another iterative method, which, by design, reduces the computation time and also improves the quality of the clusters produced. The algorithm works by branching large clusters into smaller ones. The algorithm, described by \cite{steinbach2000comparison}, goes as follows:
+\begin{enumerate}
+  \item Start with the entire set of objects in the space as part of a single cluster.
+  \item\label{tes:itm:bkm} Choose the largest cluster in the space.
+  \item Split the objects into two sub-clusters and refine iteratively as by way of the k-means algorithm.
+  \item Repeat from Step \label{tes:itm:bka} until $k$ clusters are produced.
+\end{enumerate}
+%
+\subsubsection{Agglomerative Clustering Algorithm}
+Contrary to the k-means algorithm (and more specifically the bisecting k-means) is the Agglomerative clustering algorithm. Instead of starting with a single cluster containing all points, this algorithm instead places every point in its own cluster and merges them until the required number of clusters are produced. \citep{way2012advances} describes the algorithm as:
+\begin{enumerate}
+  \item Begin with each object in its own cluster.
+  \item\label{tes:itm:aca} Merge the two closest clusters.
+  \item Repeat Step \ref{tes:itm:aca} until $k$ clusters remain.
 \end{enumerate}
 
 %--------------------------------------------------------------------------------------
