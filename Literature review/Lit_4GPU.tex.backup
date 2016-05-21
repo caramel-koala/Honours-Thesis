@@ -35,7 +35,6 @@ The GPC is further broken down into five streaming multiprocessors(SMs) which ar
 \end{figure}
 %
 \subsubsection{GPU Memory Hierarchy}
-
 %--------------------------------------------------------------------------------------
 \subsection{CUDA}\label{soft:sec:cuda}
 CUDA is a parallel programming language created by NVIDIA for the purpose of running on their brand of GPU's. CUDA was modeled as a C-like language with some C++ features. Its main feature is the way in which it separates CPU and GPU code. The CPU code is labeled as ``host'' code and the GPU's as ``device'' code. Device code is called by the host through a special case of a method, known as a kernel. The basic structure of a kernel is as follows: 
