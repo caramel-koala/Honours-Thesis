@@ -4,12 +4,30 @@
 A Voronoi Diagram is a partitioning of a space $S$ by a set of points. Given $n$ points (seed points) the the space, $P = \{p_0,p_2,...,p_{n-1}\}, P \subset S$, is partitioned into $n$ regions, known as Voronoi Regions or Voronoi Cell, where every point, $s \in S_i,0 \leq i \leq n-1$ in a region, $S_i \subset S$, is closest to a single seed point, $p_i \in P$, in terms of the space's distance measurement operation, $d$ (\cite{okabe2009spatial}). An example of a Voronoi Diagram can be seen in Figure \ref{tes:fig:voreg}.
 %
 \subsubsection{Weighted Voronoi Tessellations}\label{tes:ssec:wei}
+The basic form of the Voronoi tessellation has the seed points as being indistinguishable from one another, other than their different positions in the space. An extension of the tessellation is to break this rule and to have the seeds have some bias or weighting associated with them. These weightings can represent a property of the data, for example, in terms of radio interferometry, they can represent the intensity of each source detected. This weighting can affect $d$ in different ways, depending on how the weighting is accounted for, this is know as the ``weighted distance''. Some of these methods, as stated in \cite{okabe2009spatial} include multiplicative, additive, compound and power Voronoi diagrams. These diagrams have distance operators described as $d_M$, $d_A$, $d_C$, $d_P$ respectively.
 %
-\subsubsection{Voronoi Tessellations in Non-Euclidean Spaces}\label{tes:ssec:warp}
+\begin{equation}
+\begin{align}
+  d_M(s,p_i) &= \frac{1}{w_i}d			\\
+  d_A(s,p_i) &= d - w_i				\\
+  d_C(s,p_i) &= \frac{1}{w_{i1}}d - w_{i2}	\\
+  d_P(s,p_i) &= d^2 - w_i			\\
+\end{align}
+\end{equation}
+%
+Problems arise in attempting to compute the tessellations for the multiplicative, additive and compound Voronoi diagrams as the edges of these diagrams, could potentially be curved by circular arc ($d_M$,$d_C$), a hyperbolic arc ($d_A$,$d_C$) or a fourth order polynomial arc ($d_C$) \citep{okabe2009spatial}. This leaves the power diagram as the only Voronoi diagram which enforces that the edges be straight lines and the resulting tessellation be a convex polygon, similar to the standard Euclidean Voronoi diagram. For the power diagram, if the weighting is equal for all points, the resulting diagram is the same as that of a standard Euclidean Voronoi diagram. It is possible in the power diagram, that a seed point will not be contained within its own associated Voronoi polygon. This occurs when two seed points ($p_i,p_j \in P$, $w_i<w_j$, $i\neq j$) are close enough together such that the weighted bisector, defined by 
+%
+\begin{equation}
+ b(p_i,p_j) = \frac{1}{2}(||\bold{x}_i||^2-||\bold{x}_j||^2+w_i-w_j) \qquad \bold{x}_i = (x_i,y_i)
+\end{equation}
+%
+does not lie on the line segment $\bar{p_ip_j}$. When this occurs, $p_i$ lies in the region of $V_j$. If the difference in weighting between $p_i$ and $p_j$ is great enough and the distance between them small enough, then the points in $V_i$ may be an empty set. It is worth noting that Power Diagrams are also referred to as General Voronoi Diagrams \citep{aurenhammer1987power}.
+%
+%\subsubsection{Voronoi Tessellations in Non-Euclidean Spaces}\label{tes:ssec:warp}
 %
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.65]{Images/voronoi.jpg}
+    %\includegraphics[scale=0.65]{Images/voronoi.jpg}
     \caption{Voronoi Diagram(\cite{voronoipic})}
     \label{tes:fig:voreg}
 \end{figure}
@@ -35,10 +53,10 @@ In it's most naive form, this algorithm achieves and efficiency of $O(n^2)$.
 \subsubsection{Divide and Conquer Algorithm}\label{tes:ssec:dac}
 The Divide and Conquer algorithm was first proposed by \cite{shamos1975closest} and also described in \cite{okabe2009spatial}. It is a recursive algorithm which improves on the Incremental algorithm by having a construction time of $O(n\log n)$.
 \begin{enumerate}
-\item If the  contains only one point, return it with the entire plane as it's voronoi region.
+\item If the  contains only one point, return it with the entire plane as it's Voronoi region.
 \item Divide the space, $S$ containing the set of seed points, $P$ with $n$ points, into two subspaces, $S_L$ and $S_R$, such that $S_L$ and $S_R$ contain $n/2$ seed points and every seed point of $P_L$ lies to the left of every seed point of $P_R$ (this is made easier if $P$ is ordered).
-\item Recursively compute the voronoi tessellations for $P_L$ in $S_L$ and $P_R$ in $S_R$; $V_L$ and $V_R$ respectively.
-\item A polygonal line, $Q$, must now be found such that $Q$ merges $V_L$ and $V_R$ into a single voronoi tessellation, $V$:
+\item Recursively compute the Voronoi tessellations for $P_L$ in $S_L$ and $P_R$ in $S_R$; $V_L$ and $V_R$ respectively.
+\item A polygonal line, $Q$, must now be found such that $Q$ merges $V_L$ and $V_R$ into a single Voronoi tessellation, $V$:
 \begin{enumerate}
  \item Starting with the polygon of $V_R$ which contains the top-left corner of $S_R$, $p_R$ and the polygon of $V_L$ which contains the top-right corner of $S_L$, $p_L$. Since $p_L$ must lie to the left of $p_R$, they must overlap when $V_L$ and $V_R$ are extended into $S$.
  \item\label{tes:itm:dac:bis} A perpendicular bisector is drawn between $p_L$ and $p_R$ and segmented between its two closest edge intercepts from the shortest distance between $p_L$ and $p_R$ and add this segment to $Q$.
@@ -46,7 +64,7 @@ The Divide and Conquer algorithm was first proposed by \cite{shamos1975closest} 
  \item Continue from step \ref{tes:itm:dac:bis} until the bottom of $S$ is reached.
 \end{enumerate}
 \item Remove all line segments of $V_L$ to the right of $Q$ and all those of $V_R$ to the left of $Q$ to form $V$.
-\item Return $V$ recursively until the full voronoi tessellation is complete.
+\item Return $V$ recursively until the full Voronoi tessellation is complete.
 \end{enumerate}
 Part of achieving this efficiency is assuming $P$ is co-lexicographically ordered, meaning for all $p_i,p_j \in P$, $0 \leq i < j < n$; $x_i > x_j$ or $(x_i = x_j$ and $y_i > y_j)$. This speeds up the partitioning of $P$ into $P_R$ and $P_L$ at each level of recursion.
 %
@@ -59,7 +77,7 @@ Where $r_i(s)$ is defined as the distance to the seed point $p_i \in P$ and $r(s
 \begin{enumerate}
   \item Add $P$ to $Q$.
   \item Choose and delete the leftmost seed point, $p_i$ from $Q$
-  \item Create a list, $L$ containing the transformed voronoi region of $p_i$, $\phi(V_i)$.
+  \item Create a list, $L$ containing the transformed Voronoi region of $p_i$, $\phi(V_i)$.
   \item\label{tes:itm:for:q} While $Q$ is not empty do the following:
   \begin{enumerate}
     \item Choose and delete the leftmost element, $w$ of $Q$.
@@ -85,17 +103,19 @@ Where $r_i(s)$ is defined as the distance to the seed point $p_i \in P$ and $r(s
 \end{enumerate}
 %--------------------------------------------------------------------------------------
 \subsection{Clustering Algorithms} \label{tes:sec:clu}
+It may be the case that the number of potential seed points in a space, $N_p=||P||$, is much larger than the optimal number of facets, $N_v$. In these cases it would reduce the overall computaiton time drastically if the $N_p$ points were grouped into $N_v$ clusters. From each of these clusters, one point is then chosen as a seed point to be used to find the corresponding Voronoi Tessellation. Some key examples of such clustering algorithms are described in this subsection.
 %
 \subsubsection{K-Means Algorithm}\label{tes:ssec:kma}
+
 %--------------------------------------------------------------------------------------
 \subsection{Related Work}\label{ra:sec:rw}
 %
 \subsubsection{Standard Voronoi Faceting}\label{ra:ssec:svf}
-In \cite{tasse2014applying}, \cite{smirnov2015radio} and \cite{van2016lofar}, a series of simulated extragalactic points are clustered into facets using a voronoi tessellation algorithm, the seed points for these facets are set as the brightest points in each facet. Another example of this can be seen in Figure \ref{tes:fig:stelvor} where the facets are superimposed over the source image from which they are derived.
+In \cite{tasse2014applying}, \cite{smirnov2015radio} and \cite{van2016lofar}, a series of observed extragalactic points are clustered into facets using a Voronoi tessellation algorithm, the seed points for these facets are set as the brightest points in each facet. Another example of this can be seen in Figure \ref{tes:fig:stelvor} where the facets are superimposed over the source image from which they are derived.
 %
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.4]{Images/tesselation.png}
+    %\includegraphics[scale=0.4]{Images/tessellation.png}
     \caption{Example of Voronoi Faceting to group Extragalactic points for DD-calibration \citep{oleg}}
     \label{tes:fig:stelvor}
 \end{figure}
