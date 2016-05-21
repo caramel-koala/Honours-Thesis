@@ -27,12 +27,11 @@
   howpublished 		= "\url{https://www.skatelescope.org/3rd-generation-calibration-skaenews-july2015/}",
 }
 
-@MISC{tasse2016tessellation,
-  author        	= "Cyril Tasse",
-  title			= "DDFacet imager",
-  note          	= {Paper in progress},
+@MISC{oleg,
+  author        	= "Oleg Smirnov",
+  note          	= {SKA Chair at Rhodes Centre for Radio Astronomy Techniques \& Technologies},
   year          	= {2016},
-  howpublished  	= "TBD"
+  howpublished  	= "Personal Communication"
 }
 
 @article{smirnov2015radio,
@@ -60,16 +59,6 @@
   volume		= {108},
   pages			= {585--594},
   year			= {1994}
-}
-
-@article{smirnov2011revisiting,
-  title			= {Revisiting the radio interferometer measurement equation-I. A full-sky Jones formalism},
-  author		= {Smirnov, Oleg M},
-  journal		= {Astronomy \& Astrophysics},
-  volume		= {527},
-  pages			= {A106},
-  year			= {2011},
-  publisher		= {EDP Sciences}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %3 Models and Algorithms
@@ -160,13 +149,6 @@
   pages			= {525--526},
   year			= {2000},
   organization		= {Boston}
-}
-
-@book{way2012advances,
-  title			= {Advances in machine learning and data mining for astronomy},
-  author		= {Way, Michael J and Scargle, Jeffrey D and Ali, Kamal M and Srivastava, Ashok N},
-  year			= {2012},
-  publisher		= {CRC Press}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %4 Parallelism and GPUs
