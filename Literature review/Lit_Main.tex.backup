@@ -13,19 +13,20 @@
 \usepackage{fullpage}
 \usepackage[english]{babel}
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{caption,subcaption}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \include{Titlepage}
-%\tableofcontents
-%\listoffigures
 %-------------------------------------------------------------------------------------
 \include{Lit_1Intro}
 \include{Lit_2RA}
 \include{Lit_3Model}
 \include{Lit_4GPU}
 \include{Lit_5Sum}
+
 %-------------------------------------------------------------------------------------
 \bibliography{Lit_bib}
 \bibliographystyle{ruauthordate}
+\include{Lit_6Timeline}
 \end{document}          
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

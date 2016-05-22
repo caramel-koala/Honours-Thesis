@@ -1,0 +1,5 @@
+\section{Introduction}\label{int}
+In this paper we will discuss the literature and resources required to create the sky tessellation algorithm and the techniques which could be used to optimize it.
+\\
+We will begin by looking at the background of the problem in radio astronomy. We will see how radio telescopes work, how the image is created and how direction-dependent effects occur.
+%--------------------------------------------------------------------------------------
