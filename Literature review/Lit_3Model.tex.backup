@@ -116,6 +116,15 @@ K-means clustering is an iterative process where an initial guess at the center 
 \end{enumerate}
 One obvious problem with this problem is the number of iterations can be unpredictable, this is addressed by having the sum of changes only converge to $\epsilon$, instead of complete convergence. With large data sets and large $k$-values where the mean points converge in smaller steps with every iteration, this can help drastically reduce the runtime of the algorithm. The clusters produced are also dependent on the initial placement of the mean points \citep{way2012advances}. Other methods of improving the runtime include probabilistic choices of starting mean points \citep{arthur2007k} and constraining the distance and using the triangle inequality \citep{hamerly2010making}.
 %
+\subsubsection{Agglomerative Clustering Algorithm}
+Contrary to the k-means algorithm (and more specifically the bisecting k-means) is the Agglomerative clustering algorithm. Instead of starting with a single cluster containing all points, this algorithm instead places every point in its own cluster and merges them until the required number of clusters are produced. \citep{way2012advances} describes the algorithm as:
+\begin{enumerate}
+  \item Begin with each object in its own cluster.
+  \item\label{tes:itm:aca} Merge the two closest clusters.
+  \item Repeat Step \ref{tes:itm:aca} until $k$ clusters remain.
+\end{enumerate}
+Although this algorithm will always yield the same result for a given data set, it is far more expensive than the k-mean. Improvements can be made on this, however by instead building a minimum spanning tree, weighted by the distance between the data and iteratively removing the links with the highest weights until the number of required clusters is produced.
+%
 \subsubsection{Bisecting K-Means Algorithm}\label{tes:ssec:bkma}
 A variation on the k-means algorithm is to embed it into another iterative method, which, by design, reduces the computation time and also improves the quality of the clusters produced. The algorithm works by branching large clusters into smaller ones. The algorithm, described by \cite{steinbach2000comparison}, goes as follows:
 \begin{enumerate}
@@ -124,15 +133,6 @@ A variation on the k-means algorithm is to embed it into another iterative metho
   \item Split the objects into two sub-clusters and refine iteratively as by way of the k-means algorithm.
   \item Repeat from Step \label{tes:itm:bka} until $k$ clusters are produced.
 \end{enumerate}
-%
-\subsubsection{Agglomerative Clustering Algorithm}
-Contrary to the k-means algorithm (and more specifically the bisecting k-means) is the Agglomerative clustering algorithm. Instead of starting with a single cluster containing all points, this algorithm instead places every point in its own cluster and merges them until the required number of clusters are produced. \citep{way2012advances} describes the algorithm as:
-\begin{enumerate}
-  \item Begin with each object in its own cluster.
-  \item\label{tes:itm:aca} Merge the two closest clusters.
-  \item Repeat Step \ref{tes:itm:aca} until $k$ clusters remain.
-\end{enumerate}
-
 %--------------------------------------------------------------------------------------
 \subsection{Related Work}\label{ra:sec:rw}
 %

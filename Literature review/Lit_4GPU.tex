@@ -10,7 +10,7 @@ The increased need for parallelism came about in 2005, when CPU frequency peaked
 Graphical Processing Units (GPUs) were originally designed for rendering pixels and vectors in games. They were especially designed for this since CPU's are optimized to run sequential instructions as fast as possible; whereas pixel and vector calculations are inherently parallel. With NVIDIA's release of CUDA in 2006, general purpose GPU (GPGPU) programming became common place as a way to accelerate data processing through data parallelism and task parallelism through the simultaneous execution of similar tasks (\cite{nvidia_cuda}).
 \\
 \\
-The power of GPUs comes from its architecture which is optimized for a special case of SIMD (Single Instruction Multiple Data) processing known as SIMT (Single Instruction Multiple Threads). SIMD allows a central processor to distribute a set of instructions to multiple simple processors which then act on the data simultaneously. SIMT is more generalized as each warp of the GPU can perform different tasks given the same set of instructions. This is due to the way in which the GPU handles branching at the thread level. By exploiting these processes, and this instructional architecture, some instructions can be computed faster than a CPU (\cite{vuduc2013brief}).
+The power of GPUs comes from its architecture which is optimized for a special case of SIMD (Single Instruction Multiple Data) processing known as SIMT (Single Instruction Multiple Threads). SIMD allows a central processor to distribute a set of instructions to multiple simple processors which then act on the data simultaneously. SIMT is more generalized as each warp (Section \ref{gpu:ssec:smm}) of the GPU can perform different tasks given the same set of instructions. This is due to the way in which the GPU handles branching at the thread level. By exploiting these processes, and this instructional architecture, some instructions can be computed faster than a CPU (\cite{vuduc2013brief}).
 %--------------------------------------------------------------------------------------
 \subsection{The NVIDIA GeForce GTX 750 Ti}\label{gpu:sec:750}
 %
@@ -22,14 +22,14 @@ The GPC is further broken down into five streaming multiprocessors(SMs) which ar
 %
 \begin{figure}[H]
  \centering
- %\includegraphics[width=0.7\textwidth]{Images/GM107.jpg}
+ \includegraphics[width=0.5\textwidth]{Images/GM107.jpg}
  \caption{NVIDIA Maxwell Architecture(\cite{GM107})}
  \label{gpu:img:gm107}
 \end{figure}
 %
 \begin{figure}[H]
 \centering
- %\includegraphics[width=0.5\textwidth]{Images/GM107SMM.png}
+ \includegraphics[width=0.3\textwidth]{Images/GM107SMM.png}
  \caption{Maxwell Streaming Multiprocessor(\cite{GM107SMM})}
  \label{gpu:img:smm}
 \end{figure}
