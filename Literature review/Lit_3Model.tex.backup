@@ -27,7 +27,7 @@ does not lie on the line segment $\bar{p_ip_j}$. When this occurs, $p_i$ lies in
 %
 \begin{figure}[H]
     \centering
-    %\includegraphics[scale=0.65]{Images/voronoi.jpg}
+    \includegraphics[scale=0.65]{Images/voronoi.jpg}
     \caption{Voronoi Diagram(\cite{voronoipic})}
     \label{tes:fig:voreg}
 \end{figure}
@@ -117,7 +117,7 @@ K-means clustering is an iterative process where an initial guess at the center 
 One obvious problem with this problem is the number of iterations can be unpredictable, this is addressed by having the sum of changes only converge to $\epsilon$, instead of complete convergence. With large data sets and large $k$-values where the mean points converge in smaller steps with every iteration, this can help drastically reduce the runtime of the algorithm. The clusters produced are also dependent on the initial placement of the mean points \citep{way2012advances}. Other methods of improving the runtime include probabilistic choices of starting mean points \citep{arthur2007k} and constraining the distance and using the triangle inequality \citep{hamerly2010making}.
 %
 \subsubsection{Agglomerative Clustering Algorithm}
-Contrary to the k-means algorithm (and more specifically the bisecting k-means) is the Agglomerative clustering algorithm. Instead of starting with a single cluster containing all points, this algorithm instead places every point in its own cluster and merges them until the required number of clusters are produced. \citep{way2012advances} describes the algorithm as:
+Contrary to the k-means algorithm (and more specifically the bisecting k-means) is the agglomerative clustering algorithm. Instead of starting with a single cluster containing all points, this algorithm instead places every point in its own cluster and merges them until the required number of clusters are produced. \citep{way2012advances} describes the algorithm as:
 \begin{enumerate}
   \item Begin with each object in its own cluster.
   \item\label{tes:itm:aca} Merge the two closest clusters.
@@ -141,7 +141,7 @@ In \cite{tasse2014applying}, \cite{smirnov2015radio} and \cite{van2016lofar}, a 
 %
 \begin{figure}[H]
     \centering
-    %\includegraphics[scale=0.4]{Images/tessellation.png}
+    \includegraphics[scale=0.4]{Images/tessellation.png}
     \caption{Example of Voronoi Faceting to group Extragalactic points for DD-calibration}
     \label{tes:fig:stelvor}
 \end{figure}
