@@ -1,10 +1,10 @@
 \section{Models and Algorithms}\label{tes}
 %--------------------------------------------------------------------------------------
 \subsection{Voronoi Tessellations}\label{tes:sec:vor}
-A Voronoi Diagram is a partitioning of a space $S$ by a set of points. Given $n$ points (seed points) the the space, $P = \{p_0,p_2,...,p_{n-1}\}, P \subset S$, is partitioned into $n$ regions, known as Voronoi Regions or Voronoi Cell, where every point, $s \in S_i,0 \leq i \leq n-1$ in a region, $S_i \subset S$, is closest to a single seed point, $p_i \in P$, in terms of the space's distance measurement operation, $d$ \citep{okabe2009spatial}. An example of a Voronoi Diagram can be seen in Figure \ref{tes:fig:voreg}.
+A Voronoi Diagram is a partitioning of a space $S$ by a set of points. Given $n$ points (seed points) the space, $P = \{p_0,p_2,...,p_{n-1}\}, P \subset S$, is partitioned into $n$ regions, known as Voronoi regions or Voronoi cells, where every point, $s \in S_i,0 \leq i \leq n-1$ in a region, $S_i \subset S$, is closest to a single seed point, $p_i \in P$, in terms of the space's distance measurement operation, $d$ \citep{okabe2009spatial}. An example of a Voronoi Diagram can be seen in Figure \ref{tes:fig:voreg}.
 %
 \subsubsection{Weighted Voronoi Tessellations}\label{tes:ssec:wei}
-The basic form of the Voronoi tessellation has the seed points as being indistinguishable from one another, other than their different positions in the space. An extension of the tessellation is to break this rule and to have the seeds have some bias or weighting associated with them. These weightings can represent a property of the data, for example, in terms of radio interferometry, they can represent the intensity of each source detected. This weighting can affect $d$ in different ways, depending on how the weighting is accounted for, this is know as the ``weighted distance''. Some of these methods, as stated in \citet{okabe2009spatial} include multiplicative, additive, compound and power Voronoi diagrams. These diagrams have distance operators described as $d_M$, $d_A$, $d_C$, $d_P$ respectively.
+The basic form of the Voronoi tessellation has the seed points as being indistinguishable from one another, other than their different positions in the space. An extension of the tessellation is to break this rule and to have the seeds have some bias or weighting associated with them. These weightings can represent a property of the data, for example, in terms of radio interferometry, they can represent the intensity of each source detected. This weighting can affect $d$ in different ways, depending on how the weighting is accounted for; this is know as the ``weighted distance''. Some of these methods, discussed in \citet{okabe2009spatial} include multiplicative, additive, compound and power Voronoi diagrams. These diagrams have distance operators described as $d_M$, $d_A$, $d_C$, and $d_P$ respectively.
 %
 \begin{equation}
 \begin{align}
@@ -15,29 +15,29 @@ The basic form of the Voronoi tessellation has the seed points as being indistin
 \end{align}
 \end{equation}
 %
-Problems arise in attempting to compute the tessellations for the multiplicative, additive and compound Voronoi diagrams as the edges of these diagrams, could potentially be curved by circular arc ($d_M$,$d_C$), a hyperbolic arc ($d_A$,$d_C$) or a fourth order polynomial arc ($d_C$) \citep{okabe2009spatial}. This leaves the power diagram as the only Voronoi diagram which enforces that the edges be straight lines and the resulting tessellation be a convex polygon, similar to the standard Euclidean Voronoi diagram. For the power diagram, if the weighting is equal for all points, the resulting diagram is the same as that of a standard Euclidean Voronoi diagram. It is possible in the power diagram, that a seed point will not be contained within its own associated Voronoi polygon. This occurs when two seed points ($p_i,p_j \in P$, $w_i<w_j$, $i\neq j$) are close enough together such that the weighted bisector, defined by 
+Problems arise in attempting to compute the tessellations for the multiplicative, additive and compound Voronoi diagrams as the edges of these diagrams, could potentially be curved by a circular arc ($d_M$,$d_C$), a hyperbolic arc ($d_A$,$d_C$) or a fourth order polynomial arc ($d_C$) \citep{okabe2009spatial}. This leaves the power diagram as the only Voronoi diagram which enforces that the edges are straight lines and the resulting tessellation is a convex polygon, similar to the standard Euclidean Voronoi diagram. For the power diagram, if the weighting is equal for all points, the resulting diagram is the same as that of a standard Euclidean Voronoi diagram. It is possible in the power diagram, that a seed point will not be contained within its own associated Voronoi polygon. This occurs when two seed points ($p_i,p_j \in P$, $w_i<w_j$, $i\neq j$) are close enough together such that the weighted bisector, defined by 
 %
 \begin{equation}
- b(p_i,p_j) = \frac{1}{2}(||\bold{x}_i||^2-||\bold{x}_j||^2+w_i-w_j) \qquad \bold{x}_i = (x_i,y_i)
+ b(p_i,p_j) = \frac{1}{2}(||\bold{x}_i||^2-||\bold{x}_j||^2+w_i-w_j) \qquad \bold{x}_i = (x_i,y_i),
 \end{equation}
 %
-does not lie on the line segment $\bar{p_ip_j}$. When this occurs, $p_i$ lies in the region of $V_j$. If the difference in weighting between $p_i$ and $p_j$ is great enough and the distance between them small enough, then the points in $V_i$ may be an empty set. It is worth noting that Power Diagrams are also referred to as General Voronoi Diagrams \citep{aurenhammer1987power}.
+does not lie on the line segment $\bar{p_ip_j}$. When this occurs, $p_i$ lies in the region of $V_j$. If the difference in weighting between $p_i$ and $p_j$ is great enough and the distance between them small enough, the points in $V_i$ may be an empty set. It is worth noting that Power Diagrams are also referred to as General Voronoi Diagrams \citep{aurenhammer1987power}.
 %
 %\subsubsection{Voronoi Tessellations in Non-Euclidean Spaces}\label{tes:ssec:warp}
 %
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.65]{Images/voronoi.jpg}
-    \caption[]{Voronoi Diagram\footnotemark}
+    \caption[]{Voronoi diagram\footnotemark}
     \label{tes:fig:voreg}
 \end{figure}
 \footnotetext{Taken from \url{http://www.ams.org/samplings/feature-column/fcarc-voronoi}}
 %--------------------------------------------------------------------------------------
 \subsection{Voronoi Tessellation Generation Algorithms}\label{tes:sec:tga}
-Although Voronoi Tessellations extend to multiple dimensions, for the sake of these algorithms we will only discuss those in a two dimensional plane.
+Although Voronoi tessellations extend to multiple dimensions, for the simplicity we will only discuss those in a two dimensional plane.
 %
 \subsubsection{Incremental Algorithm}\label{tes:ssec:inc}
-The most simplistic of the generation algorithms, the Incremental is an iterative algorithm as described by \citet{green1978computing} and \citet{okabe2009spatial}.
+The most simplistic of the generation algorithms, the Incremental is an iterative algorithm as described below \citep{green1978computing} \citep{okabe2009spatial}:
 \begin{enumerate}
 \item Starting from $i=0$ and an empty plane
 \item\label{tes:itm:inc:add} A seed point, $p_i$ is placed into the plane.
@@ -49,19 +49,19 @@ The most simplistic of the generation algorithms, the Incremental is an iterativ
 \item Continue from step \ref{tes:itm:inc:bis} until $p_f=p_{nn}$ again.
 \item Set $i = i +1$ and repeat from step \ref{tes:itm:inc:add} until $i=n$
 \end{enumerate}
-In it's most naive form, this algorithm achieves and efficiency of $O(n^2)$.
+In its most naive form, this algorithm achieves an efficiency of $O(n^2)$.
 %
 \subsubsection{Divide and Conquer Algorithm}\label{tes:ssec:dac}
-The Divide and Conquer algorithm was first proposed by \citet{shamos1975closest} and also described in \citet{okabe2009spatial}. It is a recursive algorithm which improves on the Incremental algorithm by having a construction time of $O(n\log n)$.
+The Divide and Conquer algorithm was first proposed by \citet{shamos1975closest} and also described in \citet{okabe2009spatial}. It is a recursive algorithm that improves on the Incremental algorithm by having a construction time of $O(n\log n)$.
 \begin{enumerate}
-\item If the  contains only one point, return it with the entire plane as it's Voronoi region.
-\item Divide the space, $S$ containing the set of seed points, $P$ with $n$ points, into two subspaces, $S_L$ and $S_R$, such that $S_L$ and $S_R$ contain $n/2$ seed points and every seed point of $P_L$ lies to the left of every seed point of $P_R$ (this is made easier if $P$ is ordered).
+\item If the space contains only one point, return it with the entire plane as its Voronoi region.
+\item Divide the space, $S$ containing the set of $n$ seed points, $P$, into two subspaces, $S_L$ and $S_R$, such that $S_L$ and $S_R$ contain $n/2$ seed points and every seed point of $P_L$ lies to the left of every seed point of $P_R$ (this is made easier if $P$ is ordered).
 \item Recursively compute the Voronoi tessellations for $P_L$ in $S_L$ and $P_R$ in $S_R$; $V_L$ and $V_R$ respectively.
 \item A polygonal line, $Q$, must now be found such that $Q$ merges $V_L$ and $V_R$ into a single Voronoi tessellation, $V$:
 \begin{enumerate}
  \item Starting with the polygon of $V_R$ which contains the top-left corner of $S_R$, $p_R$ and the polygon of $V_L$ which contains the top-right corner of $S_L$, $p_L$. Since $p_L$ must lie to the left of $p_R$, they must overlap when $V_L$ and $V_R$ are extended into $S$.
  \item\label{tes:itm:dac:bis} A perpendicular bisector is drawn between $p_L$ and $p_R$ and segmented between its two closest edge intercepts from the shortest distance between $p_L$ and $p_R$ and add this segment to $Q$.
- \item If the lower intercepting edge of the is in $V_R$ then $p_R$ is set to the seed point polygon which shares this edge and similarly if the edge is in $V_L$.
+ \item If the lower edge, intercepted by the bisector is in $V_R$ then $p_R$ is set to the seed point polygon which shares this edge and similarly if the edge is in $V_L$.
  \item Continue from step \ref{tes:itm:dac:bis} until the bottom of $S$ is reached.
 \end{enumerate}
 \item Remove all line segments of $V_L$ to the right of $Q$ and all those of $V_R$ to the left of $Q$ to form $V$.
@@ -72,12 +72,12 @@ Part of achieving this efficiency is assuming $P$ is co-lexicographically ordere
 \subsubsection{Fortune's Algorithm (Sweep-Line Method)}\label{tes:ssec:fort}
 \citet{fortune1987sweepline} describes an algorithm where the tessellations are found by a line ``sweeping'' over the space and solving the problem at each step of the sweep. This can be problematic for Voronoi tessellations as the line may intercept the Voronoi Region of a seed point before it intercepts the point. Therefore the Voronoi Tessellation is not computed directly, but through a geometric transform. The transform $\phi(x(s),y(s))$ works such that for any point, $s \in S$ with coordinates $(x(s),y(s))$, 
 \begin{equation}
-  \phi(x(s),y(s)) = (x(s) + r(s), y(s))
+  \phi(x(s),y(s)) = (x(s) + r(s), y(s)),
 \end{equation}
-Where $r_i(s)$ is defined as the distance to the seed point $p_i \in P$ and $r(s) = min\{r_i(s) | 1 \leq i \leq n-1\}$, is the distance to the closest seed point to $s$. This transform can then easily be reversed to re-obtain $S$ and its set of Voronoi tessellations. Now, for the transform of $S$, $\phi(S)$ denoted by $\Phi$, the left-most point of each Voronoi Region is its seed point (except the left-most seed point), this is essential for the algorithm. It is important to note that the perpendicular bisectors of seed points in $S$, through the transform, become hyperbolas in $\Phi$ (provided they are not horizontal in $S$). For $p_i,p_j\in P$, the hyperbola is denoted as $h_{ij}$ which can be split into $h^+_{ij}$ and $h^-_{ij}$ as the upper and lower half-hyperbolas about the left-most point respectively. Set $Q$ is denoted as the set of all event points in the algorithm. $Q$ is initially populated with the seed points (in co-lexicographical order) but the edge interceptions will be added as they are found. The algorithm, as described by \citet{okabe2009spatial} goes as follows:
+where $r_i(s)$ is defined as the distance to the seed point $p_i \in P$ and $r(s) = min\{r_i(s) | 1 \leq i \leq n-1\}$, is the distance to the closest seed point to $s$. This transform can then easily be reversed to re-obtain $S$ and its set of Voronoi tessellations. Now, for the transform of $S$, $\phi(S)$ denoted by $\Phi$, the left-most point of each Voronoi Region is its seed point (except the left-most seed point), this is tessential for the algorithm. It is important to note that the perpendicular bisectors of seed points in $S$, through the transform, become hyperbolas in $\Phi$ (provided they are not horizontal in $S$). For $p_i,p_j\in P$, the hyperbola is denoted as $h_{ij}$ which can be split into $h^+_{ij}$ and $h^-_{ij}$ as the upper and lower half-hyperbolas about the left-most point, respectively. Set $Q$ is denoted as the set of all event points in the algorithm. $Q$ is initially populated with the seed points (in co-lexicographical order) but the edge interceptions will be added as they are found. The algorithm, as described by \citet{okabe2009spatial} goes as follows:
 \begin{enumerate}
   \item Add $P$ to $Q$.
-  \item Choose and delete the leftmost seed point, $p_i$ from $Q$
+  \item Choose and delete the leftmost seed point, $p_i$ from $Q$.
   \item Create a list, $L$ containing the transformed Voronoi region of $p_i$, $\phi(V_i)$.
   \item\label{tes:itm:for:q} While $Q$ is not empty do the following:
   \begin{enumerate}
@@ -88,43 +88,34 @@ Where $r_i(s)$ is defined as the distance to the seed point $p_i \in P$ and $r(s
       \item Find the region, $\phi(V_j)$, containing $p_i$.
       \item Replace $\phi(V_j)$ in $L$ with $(\phi(V_j),h^-_{ij},\phi(V_i),h^+_{ij},\phi(V_j))$
       \item The half-hyperbola intercept(s) with any other hyperbolas are found, if they exist, and are appended to the front of $Q$.
-      \item Repeat from \ref{tes:itm:for:q}.
+      \item Repeat from step \ref{tes:itm:for:q}.
     \end{enumerate}
     \item If $w$ is a half-edge:
     \begin{enumerate}
       \item Set $\phi(q_t)=w$ where $\phi(q_t)$ is the intercept of $h^\pm_{ij}$ and $h^\pm_{jk}$.
       \item Replace all sequences of the form ($h^\pm_{ij},\phi{V_j},h^\pm_{jk}$) on $L$ with $h=h^+_{ik}$ or $h=h^-_{ik}$ appropriately.
       \item Remove from $Q$ any intersections of $h^\pm_{ij}$ and $h^\pm_{jk}$ with other half-hyperbolas.
-      \item Move any intersections of $h$ in $L$ to $Q$
+      \item Move any intersections of $h$ in $L$ to $Q$.
       \item\label{tes:itm:for:mark} Mark $\phi(q_t)$ as a Voronoi vertex incident to $h^\pm_{ij}$, $h^\pm_{jk}$ and $h$.
-      \item Repeat from \ref{tes:itm:for:q}.
+      \item Repeat from step \ref{tes:itm:for:q}.
     \end{enumerate}
   \end{enumerate}
   \item Return the half-hyperbolas on $L$, the set of marked intersections from step \ref{tes:itm:for:mark} and the relations among them.
 \end{enumerate}
 %--------------------------------------------------------------------------------------
 \subsection{Clustering Algorithms} \label{tes:sec:clu}
-It may be the case that the number of potential seed points in a space, $N_p$, is much larger than the optimal number of facets, $N_v$. In these cases it would reduce the overall computation time drastically if the $N_p$ points were grouped into $N_v$ clusters. From each of these clusters, a point is then chosen as a seed point to be used to find the corresponding Voronoi Tessellation. Some key examples of such clustering algorithms are described in this subsection.
+It may be the case that the number of potential seed points in a space, $N_p$, is much larger than the optimal number of facets, $N_v$. In these cases it would reduce the overall computation time drastically if the $N_p$ points were grouped into $N_v$ clusters. From each of these clusters, a point is then chosen as a seed point to be used to find the corresponding Voronoi tessellation. Some key examples of such clustering algorithms are described in this subsection.
 %
 \subsubsection{K-Means Algorithm}\label{tes:ssec:kma}
-K-means clustering is an iterative process where an initial guess at the center of a cluster, $c$, is guessed at and improved with each iteration. It is named as such because it seeks to separate $n$ objects into $k$ cluster where, for each object in a cluster $( o^i \in C_i$, $i \in \mathbb{R}$, $0\leq<i<k-1)$ the mean point of that cluster, $c_i$, is closer to it than any other mean point and the $c_i$ is representative of the average value of all points, $\frac{1}{m}\sum^m_{j=1}o^i_j$, in $C_i$. \citet{way2012advances} describes the algorithm as follows:
+K-means clustering is an iterative process where an initial guess at the center of a cluster, $c$, is made and improved with each iteration. It is named as such because it seeks to separate $n$ objects into $k$ clusters where, for each object in a cluster $( o^i \in C_i$, $i \in \mathbb{R}$, $0\leq i \leq k-1)$ the mean point of that cluster, $c_i$, is closer to it than any other mean point and the $c_i$ is representative of the average value of all points, $\frac{1}{m}\sum^m_{j=1}o^i_j$, in $C_i$. \citet{way2012advances} describe the algorithm as follows:
 \begin{enumerate}
-  \item	Randomly choose $k$ mean points $(c_0,\dots,c_{k-1})$
+  \item	Randomly choose $k$ mean points $(c_0,\dots,c_{k-1})$.
   \item\label{tes:itm:km} Assign each $c_i$ an empty object set, $C_i$.
-  \item Iterate through all the objects in the space $(o_0,\dots,o_{n-1})$ and assign it to the object set of the mean point closest to it.
+  \item Iterate through all the objects in the space $(o_0,\dots,o_{n-1})$ and assign the object to the object set of the mean point closest to it.
   \item Set all $c_i$ to be the average of all points in their respective $C_i$.
-  \item If the sum of the changes in $c_i$, $\sum_0^{k-1} \Delta c_i$, is greater than some given tolerance, $\epsilon$, then repeat from Step \ref{tes:itm:km}, else return the set of means (and their object sets if 	      necessary).
+  \item If the sum of the changes in $c_i$, $\sum_0^{k-1} \Delta c_i$, is greater than some given tolerance, $\epsilon$, then repeat from step \ref{tes:itm:km}, else return the set of means (and their object sets if 	      necessary).
 \end{enumerate}
-One obvious problem with this problem is the number of iterations can be unpredictable, this is addressed by having the sum of changes only converge to $\epsilon$, instead of complete convergence. With large data sets and large $k$-values where the mean points converge in smaller steps with every iteration, this can help drastically reduce the runtime of the algorithm. The clusters produced are also dependent on the initial placement of the mean points \citep{way2012advances}. Other methods of improving the runtime include probabilistic choices of starting mean points \citep{arthur2007k} and constraining the distance and using the triangle inequality \citep{hamerly2010making}.
-%
-\subsubsection{Agglomerative Clustering Algorithm}
-Contrary to the k-means algorithm (and more specifically the bisecting k-means) is the agglomerative clustering algorithm. Instead of starting with a single cluster containing all points, this algorithm instead places every point in its own cluster and merges them until the required number of clusters are produced. \citet{way2012advances} describes the algorithm as:
-\begin{enumerate}
-  \item Begin with each object in its own cluster.
-  \item\label{tes:itm:aca} Merge the two closest clusters.
-  \item Repeat Step \ref{tes:itm:aca} until $k$ clusters remain.
-\end{enumerate}
-Although this algorithm will always yield the same result for a given data set, it is far more expensive than the k-mean. Improvements can be made on this, however by instead building a minimum spanning tree, weighted by the distance between the data and iteratively removing the links with the highest weights until the number of required clusters is produced.
+One obvious problem with this algorithm is that the number of iterations can be unpredictable; this is addressed by having the sum of changes only converge to $\epsilon$, instead of complete convergence. With large data sets and large $k$-values where the mean points converge in smaller steps with every iteration, this can help drastically reduce the runtime of the algorithm. The clusters produced are also dependent on the initial placement of the mean points \citep{way2012advances}. Other methods of improving the runtime include probabilistic choices of starting mean points \citep{arthur2007k} and constraining the distance and using the triangle inequality \citep{hamerly2010making}.
 %
 \subsubsection{Bisecting K-Means Algorithm}\label{tes:ssec:bkma}
 A variation on the k-means algorithm is to embed it into another iterative method, which, by design, reduces the computation time and also improves the quality of the clusters produced. The algorithm works by branching large clusters into smaller ones. The algorithm, described by \citet{steinbach2000comparison}, goes as follows:
@@ -132,18 +123,27 @@ A variation on the k-means algorithm is to embed it into another iterative metho
   \item Start with the entire set of objects in the space as part of a single cluster.
   \item\label{tes:itm:bkm} Choose the largest cluster in the space.
   \item Split the objects into two sub-clusters and refine iteratively as by way of the k-means algorithm.
-  \item Repeat from Step \label{tes:itm:bka} until $k$ clusters are produced.
+  \item Repeat from step \ref{tes:itm:bkm} until $k$ clusters are produced.
 \end{enumerate}
+%
+\subsubsection{Agglomerative Clustering Algorithm}
+Contrary to the k-means algorithm (and more specifically the bisecting k-means) is the agglomerative clustering algorithm. Instead of starting with a single cluster containing all points, this algorithm instead places every point in its own cluster and merges them until the required number of clusters are produced. \citet{way2012advances} describe the algorithm as:
+\begin{enumerate}
+  \item Begin with each object in its own cluster.
+  \item\label{tes:itm:aca} Merge the two closest clusters.
+  \item Repeat step \ref{tes:itm:aca} until $k$ clusters remain.
+\end{enumerate}
+Although this algorithm will always yield the same result for a given data set, it is far more expensive than the k-mean. Improvements can be made on this, however by instead building a minimum spanning tree, weighted by the distance between the data and iteratively removing the links with the highest weights until the number of required clusters is produced.
 %--------------------------------------------------------------------------------------
 \subsection{Related Work}\label{ra:sec:rw}
 %
 \subsubsection{Standard Voronoi Faceting}\label{ra:ssec:svf}
-In \citet{tasse2014applying}, \citet{smirnov2015radio} and \citet{van2016lofar}, a series of observed or simulated extragalactic points are clustered into facets using a Voronoi tessellation algorithm, the seed points for these facets are set as the brightest points in each facet. Another example of this can be seen in Figure \ref{tes:fig:stelvor} where the facets are superimposed over the source image from which they are derived.
+In \citet{tasse2014applying}, \citet{smirnov2015radio} and \citet{van2016lofar}, a series of observed or simulated extragalactic points are clustered into facets using a Voronoi tessellation algorithm with the seed points for these facets set as the brightest points in each facet. An example of this can be seen in Figure \ref{tes:fig:stelvor} where the facets are superimposed over the source image from which they are derived.
 %
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.4]{Images/tessellation.png}
-    \caption{Example of Voronoi Faceting to group Extragalactic points for DD-calibration}
+    \caption{Example of Voronoi faceting to group extragalactic points for DD-calibration}
     \label{tes:fig:stelvor}
 \end{figure}
 %--------------------------------------------------------------------------------------
