@@ -2,10 +2,25 @@
 
 %packages for Thesis
 \usepackage{float} %for placing graphics
+\usepackage{url} %for urls in code and bibliography
+\usepackage{natbib} %for pretty referencing
+\usepackage{caption,subcaption} %for subfigures and such
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
 
 \begin{document}
 
 \include{Titlepage}
-\include{1_Introduction/Introduction}
+%\include{1_Introduction/Introduction}
+
+%Include Chapter 2
+\chapter{Background Information}
+\input{2_Background/1Intro}
+\input{2_Background/2RA}
+\input{2_Background/3Model}
+\input{2_Background/4GPU}
+\input{2_Background/5Sum}
+
+\bibliography{Thesis_bib}
+\bibliographystyle{plain}
 
 \end{document}
