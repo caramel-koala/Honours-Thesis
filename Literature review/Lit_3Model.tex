@@ -6,17 +6,17 @@ A Voronoi Diagram is a partitioning of a space $S$ by a set of points. Given $n$
 \subsubsection{Weighted Voronoi Tessellations}\label{tes:ssec:wei}
 The basic form of the Voronoi tessellation has the seed points as being indistinguishable from one another, other than their different positions in the space. An extension of the tessellation is to break this rule and to have the seeds have some bias or weighting associated with them. These weightings can represent a property of the data, for example, in terms of radio interferometry, they can represent the intensity of each source detected. This weighting can affect $d$ in different ways, depending on how the weighting is accounted for; this is know as the ``weighted distance''. Some of these methods, discussed in \citet{okabe2009spatial} include multiplicative, additive, compound and power Voronoi diagrams. These diagrams have distance operators described as $d_M$, $d_A$, $d_C$, and $d_P$ respectively.
 %
-\begin{aligned*}
+\begin{align*}
   d_M(s,p_i) &= \frac{1}{w_i}d			\\
   d_A(s,p_i) &= d - w_i				\\
   d_C(s,p_i) &= \frac{1}{w_{i1}}d - w_{i2}	\\
   d_P(s,p_i) &= d^2 - w_i			\\
-\end{aligned*}
+\end{align*}
 %
 Problems arise in attempting to compute the tessellations for the multiplicative, additive and compound Voronoi diagrams as the edges of these diagrams, could potentially be curved by a circular arc ($d_M$,$d_C$), a hyperbolic arc ($d_A$,$d_C$) or a fourth order polynomial arc ($d_C$) \citep{okabe2009spatial}. This leaves the power diagram as the only Voronoi diagram which enforces that the edges are straight lines and the resulting tessellation is a convex polygon, similar to the standard Euclidean Voronoi diagram. For the power diagram, if the weighting is equal for all points, the resulting diagram is the same as that of a standard Euclidean Voronoi diagram. It is possible in the power diagram, that a seed point will not be contained within its own associated Voronoi polygon. This occurs when two seed points ($p_i,p_j \in P$, $w_i<w_j$, $i\neq j$) are close enough together such that the weighted bisector, defined by 
 %
 \begin{equation}
- b(p_i,p_j) = \frac{1}{2}(||\bold{x}_i||^2-||\bold{x}_j||^2+w_i-w_j) \qquad \bold{x}_i = (x_i,y_i),
+ b(p_i,p_j) = \frac{1}{2}(||\mathbf{x}_i||^2-||\mathbf{x}_j||^2+w_i-w_j) \qquad \mathbf{x}_i = (x_i,y_i),
 \end{equation}
 %
 does not lie on the line segment $\bar{p_ip_j}$. When this occurs, $p_i$ lies in the region of $V_j$. If the difference in weighting between $p_i$ and $p_j$ is great enough and the distance between them small enough, the points in $V_i$ may be an empty set. It is worth noting that Power Diagrams are also referred to as General Voronoi Diagrams \citep{aurenhammer1987power}.
