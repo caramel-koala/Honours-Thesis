@@ -3,3 +3,15 @@ The current best model uses k-means clustering of of the points to the center po
 \\
 \\
 It was therefore decided that the divide and conquer method (Chapter \ref{tes:ssec:dac}) would be used. The algorithm works by ordering the points, first by their $x$ then their $y$ values. The points are then divided into two subsets, a left and right set. The Voronoi diagrams are then generated for the left and right subsets using the divide and conquer method. The convex hulls of the left and right Voronoi diagrams are then found. The lowest common support line between the hulls is then found and from this a dividing polygonal chain is generated until it intercepts the upper bounds of the plane. The intersecting edges with the polygonal chain are then determined, and cut so that part of the chain is now part of the Voronoi cells edges.
+\\
+\\
+Code for the Divide and Conquer was adapted from that in the git repository pyVoronoi\footnote{https://github.com/twmht/pyVoronoi}. pyVoronoi is an implimentation for the Divide and Conquer Voronoi algorithm written in python 2.7. pyVoronoi uses a simple GUI to genertate a voronoi diagram in a fixed plane using sources read in from a textfile. This interface, while simple to use, is constraining as it does not allow the user to specify their own spacial constrains or generate the voronoi as part of a pipleined process. The visualiser and interface were therefore removed and the remaining code refactored so that the process is a function which may be called by the user or used in a larger process.
+\\
+\\
+The Voronoi function is designed to take in three parameters, a list of all source points in the space, the dimensions of the space the points lie in and the intensity threshold. Each elelment of the list of sources has 3 parameters: x, y and z. The x and y parameters define the spatial coordinates of the source while the z parameter is seen as the intensity of the source, the list of $n$ sources are passed into the function as an $n \times 3$ numpy array of doubles. The spatial dimension parameter takes in a tuple of two values, the width and height of the space the sources are in. The intesity threshold is a single double value which defines the minimum intensity a source needs to be a voronoi cell centre.
+\\
+\\
+Once the sources are read in, they are used to generate the voronoi centres structurally defined as a point. Each point inherits the x, y and z values of the source. Each point also has a related attribute which is a list of structures containing another point and their corresponding bisecting line, this list is set as empty. The point also has an error value associated to it, this error value is set to zero and will only come into use after the voronoi diagram has been generated. Once the list of points is created, it is sorted by the x then the y values of the sources.
+\\
+\\
+Once we have our centre points we can begin generating the voronoi diagram. 
