@@ -9,12 +9,14 @@
 \usepackage[toc]{glossaries} %for glossary
 
 \makeglossaries
-\include{Glossary}
 
 \begin{document}
 
 \include{Titlepage}
+\include{Glossary}
 \tableofcontents
+\printglossaries
+
 
 %Include Chapter 1
 \chapter{Introduction}
@@ -22,11 +24,11 @@
 
 %Include Chapter 2
 \chapter{Background Information}
-\include{2_Background/1Intro}
-%\include{2_Background/2RA}
-%\include{2_Background/3Model}
-%\include{2_Background/4GPU}
-%\include{2_Background/5Sum}
+\input{2_Background/1Intro}
+\include{2_Background/2RA}
+\include{2_Background/3Model}
+\include{2_Background/4GPU}
+\include{2_Background/5Sum}
 
 %Include Chapter 3
 \chapter{WIP}
