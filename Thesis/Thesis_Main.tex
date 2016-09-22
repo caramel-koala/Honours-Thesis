@@ -6,10 +6,15 @@
 \usepackage{natbib} %for pretty referencing
 \usepackage{caption,subcaption} %for subfigures and such
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage[toc]{glossaries} %for glossary
+
+\makeglossaries
+\include{Glossary}
 
 \begin{document}
 
 \include{Titlepage}
+\tableofcontents
 
 %Include Chapter 1
 \chapter{Introduction}
@@ -17,7 +22,7 @@
 
 %Include Chapter 2
 \chapter{Background Information}
-%\input{2_Background/1Intro}
+\include{2_Background/1Intro}
 %\include{2_Background/2RA}
 %\include{2_Background/3Model}
 %\include{2_Background/4GPU}

@@ -1,0 +1,30 @@
+\ifglsentryexists{gl:gpu}{}%
+{%
+\gls@defglossaryentry{gl:gpu}%
+{%
+name={GPU},%
+sort={GPU},%
+type={main},%
+first={Graphical Processing Unit\glsspace (GPU)},%
+firstplural={Graphical Processing Units\glsspace (GPUs)},%
+text={GPU},%
+plural={GPUs},%
+description={Graphical Processing Unit},%
+descriptionplural={Graphical Processing Unit\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Graphical Processing Unit},%
+longplural={Graphical Processing Units},%
+short={GPU},%
+shortplural={GPUs},%
+counter={page},%
+parent={},%
+%
+}%
+}%

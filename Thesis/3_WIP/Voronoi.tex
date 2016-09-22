@@ -14,4 +14,4 @@ The Voronoi function is designed to take in three parameters, a list of all sour
 Once the sources are read in, they are used to generate the voronoi centres structurally defined as a point. Each point inherits the x, y and z values of the source. Each point also has a related attribute which is a list of structures containing another point and their corresponding bisecting line, this list is set as empty. The point also has an error value associated to it, this error value is set to zero and will only come into use after the voronoi diagram has been generated. Once the list of points is created, it is sorted by the x then the y values of the sources.
 \\
 \\
-Once we have our centre points we can begin generating the voronoi diagram. 
+Once we have our centre points we can begin generating the voronoi diagram. The function Voronoi takes in the list of points and the range of these points it has access to
