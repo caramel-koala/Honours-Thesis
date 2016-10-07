@@ -1,3 +1,5 @@
 \section{Cell Merge}
 
+The merge process is iterative and runs dependant on the total sum of the error of the tessellation. Initially, this error is relatively low as a mutiple cells are generated with one or very few sources contained in it. In order to keep the maximum error threshold relative, unless it is given as an input by the user, it is calculated as the product of the set standard deviation, the size of the plane and the number of sources in the plane. The process begins by summing the errors of the cells and then goes through an iterative process of finding the best merge, checking if implimenting the best merge exceeds the maximum error threshold and, if not, implimenting the best merge.
+
 \subsection{Obtaining the best Merge}
