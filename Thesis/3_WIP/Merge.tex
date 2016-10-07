@@ -6,15 +6,34 @@ The merge process is iterative and runs dependant on the total sum of the error 
 The best merge is obtained by iterating over the list of points and, for each point, testing its active neighbouring points.
 \\
 \\
-The merge test works by determining a new centre, determined by two existing centres, $\vec{p_1}$ and $\vec{p_2}$, with intensities $m_1$ and $m_2$ as
-\begin{equation}
-	P = t\vec{p_1} + (1-t)\vec{p_2} \textit{ with } t = \frac{m_1}{m_1 + m_2}
+The merge test works by determining a new centre, determined by two existing centres, $\vec{p_1}$ and $\vec{p_2}$, with intensities $z_1$ and $z_2$ as
+\begin{equation} \label{eq:merge_centre}
+	P = t\vec{p_1} + (1-t)\vec{p_2} \text{  with  } t = \frac{z_1}{z_1 + z_2}
 \end{equation}
 the new weight for the merged centre is now defined as
 \begin{equation}
-	M = m_1 + m_2
+	Z = z_1 + z_2
 \end{equation}
 Since $p_1$ and $p_2$ are centred sums of the positions of the sources in their cells, by expanding them to their original forms
-\begin{equation}
-\vec{p_1} = \frac{\sum^N_{i=0} z_{1i}\vec{s_{1i}}}{\sum^N_{i=0}z_{1i}} \textit{ and }
-\end{equation}
+\begin{equation*}
+\vec{p_1} = \frac{\sum^N_{i=0} z_{1i}\vec{x_{1i}}}{\sum^N_{i=0}z_{1i}} \text{  and  } \vec{p_2} = \frac{\sum^M_{i=0} z_{2i}\vec{x_{2i}}}{\sum^M_{i=0}z_{2i}}
+\end{equation*}
+and by noting that
+\begin{equation*}
+	z_j = \sum^N_{i=0}z_{ji}
+\end{equation*}
+Substituting these into equation \ref{eq:merge_centre}, we obtain
+\begin{align*}
+	P 	&= t\vec{p_1} + (1-t)\vec{p_2} \\
+		&= \frac{z_1}{z_1 + z_2}\frac{\sum^N_{i=0} z_{1i}\vec{x_{1i}}}{z_1} + (\frac{z_1 + z_2}{z_1 + z_2} - \frac{z_1}{z_1 + z_2})\frac{\sum^M_{i=0} z_{2i}\vec{x_{2i}}}{z_2} \\
+		&= \frac{\sum^N_{i=0} z_{1i}\vec{x_{1i}}}{z_1 + z_2} + \frac{\sum^M_{i=0} z_{2i}\vec{x_{2i}}}{z_1 + z_2} \\
+		&= \frac{\sum^N_{i=0} z_{1i}\vec{x_{1i}} + \sum^M_{i=0} z_{2i}\vec{x_{2i}}}{z_1 + z_2} \\
+		&= \frac{\sum^N_{i=0} z_{1i}\vec{x_{1i}} + \sum^M_{i=0} z_{2i}\vec{x_{2i}}}{\sum^N_{i=0}z_{1i} + \sum^M_{i=0}z_{2i}}
+\end{align*}
+This shows that equation \ref{eq:merge_centre} is equivalent to finding the centre of all the sources in both $p_1$ and $p_2$.
+\\
+\\
+Once the new centre is found, the error must be determined, this is again found by summing the square of the weighted distances to the new centre from each source. Once determined, the new centres coordinates and intensity, as well as the new error are returned. The error itself is not compared to find the best merge, but rather the change in error, that is, the merge which produces the lowest increase in the error, this is done by taking the tested merge error and subtracting from it the errors of the centres used to generate it. If it is lower, it is then stored along with the new coordinates and the centres used to generate it.
+\\
+\\
+Once the best merge is found, it is determined if the new sum of errors will exceed the threshold, if it does, the merge process is halted and the structure returned as the best possible merge. If the threshold is set too high, it may occur that all the cells merge into a single cell, in this case, the process is again halted as no best merge could be found
