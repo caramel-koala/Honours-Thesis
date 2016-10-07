@@ -1,5 +1,20 @@
 \section{Cell Merge}
 
-The merge process is iterative and runs dependant on the total sum of the error of the tessellation. Initially, this error is relatively low as a mutiple cells are generated with one or very few sources contained in it. In order to keep the maximum error threshold relative, unless it is given as an input by the user, it is calculated as the product of the set standard deviation, the size of the plane and the number of sources in the plane. The process begins by summing the errors of the cells and then goes through an iterative process of finding the best merge, checking if implimenting the best merge exceeds the maximum error threshold and, if not, implimenting the best merge.
+The merge process is iterative and runs dependant on the total sum of the error of the tessellation. Initially, this error is relatively low as a multiple cells are generated with one or very few sources contained in it. In order to keep the maximum error threshold relative, unless it is given as an input by the user, it is calculated as the product of the set standard deviation, the size of the plane and the number of sources in the plane. The process begins by summing the errors of the cells and then goes through an iterative process of finding the best merge, checking if implementing the best merge exceeds the maximum error threshold and, if not, implementing the best merge.
 
 \subsection{Obtaining the best Merge}
+The best merge is obtained by iterating over the list of points and, for each point, testing its active neighbouring points.
+\\
+\\
+The merge test works by determining a new centre, determined by two existing centres, $\vec{p_1}$ and $\vec{p_2}$, with intensities $m_1$ and $m_2$ as
+\begin{equation}
+	P = t\vec{p_1} + (1-t)\vec{p_2} \textit{ with } t = \frac{m_1}{m_1 + m_2}
+\end{equation}
+the new weight for the merged centre is now defined as
+\begin{equation}
+	M = m_1 + m_2
+\end{equation}
+Since $p_1$ and $p_2$ are centred sums of the positions of the sources in their cells, by expanding them to their original forms
+\begin{equation}
+\vec{p_1} = \frac{\sum^N_{i=0} z_{1i}\vec{s_{1i}}}{\sum^N_{i=0}z_{1i}} \textit{ and }
+\end{equation}
