@@ -45,3 +45,15 @@ An Example of the Voronoi Tessellation can be seen in Figure \ref{fig:gen_vorono
 \caption{A Generated Voronoi Tessellation.}
 \label{fig:gen_voronoi}
 \end{figure}
+\subsection{Weighted Voronoi Tessellation}
+An attempt was made to generate a weighted Voronoi tessellation using a distance transform which uses the intensities of the centres to redetermine the coordinates of the midpoint of the centres, this transform can be seen in equation \ref{eq:w_dist} where $z_1$ and $z_2$ are the intensities of $\vec{x_1}$ and $\vec{x_2}$ respectively.
+\begin{equation}\label{eq:w_dist}
+	d'(\vec{x_1},\vec{x_2}) = \frac{z_1}{z_1+z_2}\vec{x_1} + \frac{z_2}{z_1+z_2}\vec{x_2}
+\end{equation}
+This is an extension of the standard distance equation since, if $z_1=z_2$ we obtain
+\begin{align*}
+	d'(\vec{x_1},\vec{x_2}) &= \frac{z_1}{z_1+z_2}\vec{x_1} + \frac{z_2}{z_1+z_2}\vec{x_2} \\
+	d'(\vec{x_1},\vec{x_2}) &= \frac{1}{2}\vec{x_1} + \frac{1}{2}\vec{x_2} \\ 
+	d'(\vec{x_1},\vec{x_2}) &= \frac{\vec{x_1} + \vec{x_2}}{2} \\
+\end{align*}
+Some complications were found in this, namely on the convex hull. Weighted centres which are not on the hull but due to their larger weighting still have cells which dominate areas of the hull. This leads to them not being included in the merging process and their line segments not being clipped or deactivated. Another problem with this is that it generates undefined regions in the space, regions where domains overlap due conflicting weightings, an example of this can be seen in Figure
