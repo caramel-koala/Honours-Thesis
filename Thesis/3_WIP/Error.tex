@@ -22,19 +22,16 @@ Since $\vec{r_c}$ is not dependant on the sum, it can be removed and the equatio
 \begin{equation}
 	\vec{r_c} = \frac{\sum^N_{i=0} z_i\vec{r_i}}{\sum^N_{i=0}z_i}
 \end{equation}
-From this, the new centre is determined, since it is required for the cell merge, the new centre retains the old centres intensity value i.e. the highest intensity from a source in the cell. Once the cell's new centre is obtained, its error is calculated using Equation \ref{eq:cellerr}. An example of a corrected centre can be seen in Figure \ref{fig:recentre}.
+From this, the new centre is determined, since it is required for the cell merge, the new centre retains the old centres intensity value i.e. the highest intensity from a source in the cell. Once the cell's new centre is obtained, its error is calculated using Equation \ref{eq:cellerr}. An example of centre correction can be seen in the difference between Figure \ref{fig:recen1} and Figure \ref{fig:recen2}.
 \begin{figure}[H]
-\begin{subfigure}[b]{0.5\textwidth}
-  \includegraphics[width=\textwidth]{Images/recentre1.png}
-  \caption{Highest intensity centre.}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Images/recentre1.png}
+  \caption{Tessellation with high intensity points as centres.}
   \label{fig:recen1}
-\end{subfigure}
-\hfill
-\begin{subfigure}[b]{0.5\textwidth}
-  \includegraphics[width=\textwidth]{Images/recentre2.png}
-  \caption{Weighted average centre.}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{Images/recentre2.png}
+  \caption{Tessellation with the weighted average of the points in the cells as their centres.}
   \label{fig:recen2}
-\end{subfigure}
-\caption{Changing the centre of a Voronoi cell.}
-\label{fig:recentre}
 \end{figure}

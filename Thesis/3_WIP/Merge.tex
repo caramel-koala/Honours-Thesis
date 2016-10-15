@@ -40,34 +40,28 @@ Once the best merge is found, it is determined if the new sum of errors will exc
 \subsection{Executing the Merge}
 The merge execution algorithm takes in the new coordinates and intensity, $P$, the new error, as well as the centre, $p_1$, and its related centre with which it is to be merged, $p_2$. It starts by setting the coordinates and intensity of $p_1$ to those of $P$. It then sets active status the line which relates $p_1$ to $p_2$ to false and appends the list of sources in $p_2$ to that of $p_1$. The error of $p_1$ is then set to that of the new error and $p_2$ and it's list of consumed centres is added to the list of consumed centres of $p_1$. Finally, the list of centres is iterated over and any centre which references $p_2$ is changed to reference $p_1$ and all lines which relate other centres to $p_2$ are changed to relate to $p_1$ instead. Once this is complete, the process of finding the best merge begins again until the threshold is reached.
 \begin{figure}[H]
-\begin{subfigure}[b]{0.5\textwidth}
-  \includegraphics[width=\textwidth]{Images/1merge1.png}
-  \caption{Simple re-centred Voronoi before merge.}
-  \label{fig:1merge1}
-\end{subfigure}
-\hfill
-\begin{subfigure}[b]{0.5\textwidth}
-  \includegraphics[width=\textwidth]{Images/1merge2.png}
-  \caption{Simple re-centred Voronoi after single merge.}
-  \label{fig:1merge2}
-\end{subfigure}
-\caption{Single merge.}
-\label{fig:1merge}
-\end{figure}
-Figure \ref{fig:1merge} shows the effects of a single merge. As shown, the weighted distance between the merged centres is less than those of any other neighbouring centre pairs.
-\begin{figure}[H]
-\begin{subfigure}[b]{0.5\textwidth}
-  \includegraphics[width=\textwidth]{Images/merge1.png}
+  \centering
+  \includegraphics[width=0.8\textwidth]{Images/1merge1.png}
   \caption{Re-centred Voronoi before merge.}
-  \label{fig:merge1}
-\end{subfigure}
-\hfill
-\begin{subfigure}[b]{0.5\textwidth}
-  \includegraphics[width=\textwidth]{Images/merge2.png}
-  \caption{Re-centred Voronoi after merge.}
-  \label{fig:merge2}
-\end{subfigure}
-\caption{Completed merge.}
-\label{fig:merge}
+  \label{fig:1merge1}
 \end{figure}
-Figure \ref{fig:merge} shows a Voronoi Tessellation and its completed merged structure, it shows larger, more centralised cell structures.
+\begin{figure}[H]
+\centering
+  \includegraphics[width=0.8\textwidth]{Images/1merge2.png}
+  \caption{Re-centred Voronoi after single merge.}
+  \label{fig:1merge2}
+\end{figure}
+The transition from Figure \ref{fig:1merge1} to Figure \ref{fig:1merge2} shows the effects of a single merge. As shown, the weighted distance between the merged centres is less than those of any other neighbouring centre pairs.
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\linewidth]{Images/merge1.png}
+  \caption{Re-centred Voronoi with 1000 sources and 301 centres before merge.}
+  \label{fig:merge1}
+\end{figure}
+\begin{figure}[H]
+\centering
+  \includegraphics[width=\linewidth]{Images/merge2.png}
+  \caption{Re-centred Voronoi with 1000 sources and 64 centres after merge.}
+  \label{fig:merge2}
+\end{figure}
+Figure \ref{fig:merge1} shows a Voronoi Tessellation and Figure \ref{fig:merge2} shows its completed merged structure, it shows larger, more centralised cell structures.

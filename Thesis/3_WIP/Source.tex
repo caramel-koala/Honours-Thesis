@@ -8,7 +8,7 @@ The sources are read in and are used to generate the voronoi centres as a points
 For the sake of testing the system the coordinates are randomly generated on a $600 \times 600$ plane with the intensity randomly generated as the absolute value of a random normal distribution, centred at zero with a standard deviation of $3000$. Using this, 10000 sources are randomly generated. From these sources, we generate centres to be used by the Voronoi, centres are sources with an intensity greater than one standard deviation of the original mean, since the absolute value of the source intensity is used, this is all points with an intensity greater than 3000, this accounts for approximately $32\%$ of the sources.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{Images/sources.png}
-\caption{Sources and selected centres.}
+\caption{ All sources with those selected as centres having a red cross.}
 \label{fig:source}
 \end{figure}
 Figure \ref{fig:source} shows sources in green with their intensities representing the radius of the on the plane, to simplify, only $200$ points are generated. The crosses in red represent the centres that will be used to generate the Voronoi tessellation.
