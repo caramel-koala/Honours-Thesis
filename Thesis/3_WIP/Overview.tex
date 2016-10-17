@@ -1,0 +1,7 @@
+Given a large set ($\sim10000$) of extragalactic sources obtained by aperture synthesis (Chapter \ref{ra:sec:ic}), an optimal means to tessellate the space containing the sources must be found so that the correction of DD-effects is maximal.
+\\
+\\
+A Voronoi tessellation (Chapter \ref{tes:sec:vor}) will therefore be used to tessellate the space into polygonal subspaces (hereafter referred to as cells). However, the given the large number of sources, using each source as a centre is suboptimal and defeats the purpose of finding an algorithm which minimises both the error and the number of cells needed, especially considering the large intensity differences in the sources which can differ on the order of $10^5$ in magnitude.A smaller subset of the sources will therefore be used to generate the Voronoi tessellation.
+\\
+\\
+In cases where two large sources are close neighbours of one another, a single larger cell would be prefered over two smaller cells, this will however affect the overall error of the tessellation. A merge algorithm will therefore be used to find centres will relatively close centres that will lead to the lowest overall increase in the error. For the sake of the merge algorithm, it will therefore be preferred to start will a larger subset of sources as centres and merge centres together until the maximum allowed error is reached or the number of cells is minimised.
