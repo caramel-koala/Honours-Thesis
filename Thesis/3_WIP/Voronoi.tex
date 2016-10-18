@@ -7,38 +7,74 @@ To satisfy these constraints, the divide and conquer algorithm (Chapter \ref{tes
 \\
 Code for the Divide and Conquer algorithm was adapted from that in the git repository pyVoronoi\footnote{https://github.com/twmht/pyVoronoi}. pyVoronoi is an implementation for the Divide and Conquer Voronoi algorithm written in Python 2.7. It uses a simple GUI to generate a Voronoi tessellation in a fixed plane using sources read in from a text file. This interface, while simple to use, is constraining as it does not allow users to specify their own spacial constraints or generate the Voronoi as part of a pipelined process. The visualiser and interface were therefore removed and the remaining code re-factored so that the process is a function that can be called by the user or used in a larger process.
 
-\subsection{Structures of the Voronoi}
-The voronoi structure is mainly made up of two structures, lines and points. Points are mainly used to define the sources, but are also used to generate line. Points are made up of an x, y and z value, which determines the position and intensity of the point. Each point also has a circumcentre attribute to determine whether it is the point of intercept of three lines (this is most commonly used in the points at the end of a line), two point parameters to indicate the points on either side of the point if the point lies on the convex hull, these are initialised as None, a list of related structures containing another point and their corresponding bisecting line, this list is set as empty. The point also has a list of all the sources contained in the cell and an error value associated to it, these values are set to an empty list and zero respectively and will only come into use after the Voronoi tessellation has been generated.
+\subsection{Structures used by the Voronoi}
+The Voronoi structure consists of two structures, lines and centres. Centres (Chapter \ref{sec:design:source}) are mainly used to define the sources, but are also used to generate line.
 \\
 \\
-A line is made up of two points which define its endpoints, if the line is a bisector it contains two more points which define the source points used to generate it, if not these values are set to None. The line also contains a list of all the other lines the line is connected to as well. The line finally has an availability boolean parameter which defines whether or not the line is actively available to intercept with other lines or if it has been discarded from the overall voronoi structure.
+A line is made up of the following attributes:
+\begin{enumerate}
+\item Two points, defined as centres which make up the end points of the line, these are defined when the line is created.
+\item Two centres which the line bisects, which is set to be empty by default.
+\item A centre defining the circumcentre of the line which is empty when the line is created.
+\item A list of all lines connected to this one which is used during the merge of the divide and conquer which is empty by default.
+\item A boolean value determining whether the line is active or has depreciated, it is set to true by default, but this is updated when two cells are no longer neighbours, generally due to a merge.
+\end{enumerate}
 
 \subsection{Voronoi Function}
-
-The Voronoi function takes in the list of points and a range of points it will operate on (initially the entire set of points). Depending on the number of points in the subset range, one of four operations will occur. If the range is made up of more than three points, the range is divided into two equal sub ranges, one from the starting point of the range to the median and another from the point after the median to the end of the range. The Voronoi function is then called again for each sub range, denoted as VDL and VDR for left and right sub ranges respectively, with the full set of points. Once the voronoi structure for these two are calculated, the merge function is called with VDL and VDR and the function ends as it is not value returning.
+The Voronoi function takes in the set of centres and a range of centres it will operate on (initially the entire set, $C$). Depending on the number of points in the subset range, one of three operations will occur.
 \\
 \\
-If the range is three, the function generates three lines, one for the each pair of the three point. The intercepts of the lines is determined, if it does not exist, an invalid line exists, this line is found and removed. If the intercept does exist, it is found and the lines are clipped at the intercept. The lines are listed and returned with the range and the corresponding convex hull structure made up of all three points.
+If the range is made up of more than three points, the range is divided into two equal subranges, one from the starting point of the range to the median, $C_L = \{0,...,\frac{n}{2}\}$ where $n$ is the range, and another from the point after the median to the end of the range,$C_R = \{\frac{n}{2}+1,...,n\}$. The Voronoi function is then called again for each sub range, denoted as $C_L$ and $C_R$ for left and right sub ranges respectively, with the full set of points. Once the Voronoi structure for these two have been calculated, the merge function is called with $V_L$ and $V_R$, the Voronoi structures of $C_l$ and $C_R$ respectively, and the function ends as it is not value returning.
 \\
-For a range of two points, the bisecting line is determined as the only line in the structure. The line is placed in a list where it is the only element and along with the point range and the convex hull, only made up of the two points, are returned.
 \\
-The case of a single point is excluded as the first case of multiple points being divided in two equal or near equal sets and the case of three and two points in a set will make the case of a single point impossible.
+If the range is three, the function generates three bisecting lines, $b_{1,2}$, $b_{1,3}$ and $b_{2,3}$ one for each pair of the three point, $c_1$, $c_2$ and $c_3$. The intercept of $b_{1,2}$ and $b_{1,3}$ is determined, if it does not exist, the centres are colinear and an invalid line exists, the line, $l_{1,3}$ is then removed as, lexicographially, $c_2$ must lie between $c_1$ and $c_3$ and $l_{1,3}$ must therefore lie in the cell of $c_2$. If the intercept does exist, it lies on the circumcenter, $cc$ of the triangle formed by the centres and the lines $l_{1,2}$, $l_{1,3}$ and $l_{2,3}$ with centres as endpoints. The lines, $l_{1,2}$, $l_{1,3}$ and $l_{2,3}$, are ordered by the square of their lengths and the triangle they form is determined as either acute, obtuse or right angled. The centres and corresponding lines are appended to each centres list of related centres, e.g. $(c_2,b_{1,2})$ and $(c_3,b_{1,3})$ are appended to $c_1$'s list of related centres. The bisecting lines, $b_{1,2}$, $b_{1,3}$ and $b_{2,3}$, are then clipped so that they all intercept at $cc$. Figure \ref{fig:vor_triangle} shows this.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{Images/vor_triangle.png}
+\caption{A Voronoi tessellation of three points($c_1$, $c_2$ and $c_3$) with circumcenter($cc$).}
+\label{fig:vor_triangle}
+\end{figure}
+A list of the bisecting lines, the range of the points and the convex hull (which is yet to be determined) are returned.
+\\
+\\
+For a range of two points, the bisecting line, $b_{1,2}$, is determined as the only line in the structure. The centres and $b_{1,2}$ are placed into one another's related centre list and line is placed in a list as the only element. The line list, the range of the centres and their convex hull are returned.
+\\
+\\
+The case of a single centre is excluded as the case of multiple centres will divide the set of centres into two equal subsets or they will have a difference in size of one. The second and third cases will catch sets of three or two centres therefore a case of a single centre cannot be determined unless a set of a single is passed through initially, but this is meaningless as the Voronoi tessellation for this will be a single cell containing the entire space.
 
 \subsection{Convex Hull}
-The convex hull of a set of $n$ points, $P = {p_1,p_2,...,p_n}$, is defined as the smallest convex set that contains all the points of $P$. The convex set can be seen as a polygon where each vertex of the polygon is convex or less than $\pi$ radians. For the convex set to be minimal, the vertices of the convex set must lie on a subset of the points of $P$. a convex hull of $P$ can be determined in $O(n\log(n))$ time \citep{eddy1977new}.
+The convex hull of a set of $n$ points, $P = {p_0,p_1,...,p_n}$, is defined as the smallest convex set that contains all the points of $P$. The convex set can be seen as a polygon where each vertex of the polygon is convex (has an internal angle less than $\pi$ radians large). For the convex set to be minimal, the vertices of the convex set must lie on a subset of the points of $P$. a convex hull of $P$ can be determined in $O(n\log(n))$ time \citep{eddy1977new}. Figure \ref{fig:convexhull} shows and example of a convex hull.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{Images/convexhull.png}
+\caption[]{A convex hull of a set of points\footnotemark.}
+\label{fig:convexhull}
+\end{figure}
+\footnotetext{Taken from \url{http://www.evanjones.ca/convexhulls.html}}
+Andrew's monotone chain convex hull algorithm \citep{andrew1979another} was used to determine the convex hull of each subset of centres. The function is first passed a range of centres on which to operate. The centres must be ordered lexicographically, which was done when before the Voronoi creation process was started. A list of zeros, twice the size of the number of centres in the range is created; this list holds the elements of the chain. The complete convex hull is calculated in two steps, with the first finding the upper hull and the second finding the lower hull.
 \\
 \\
-Andrew's monotone chain convex hull algorithm \citep{andrew1979another} was used to determine the convex hull of a set of points. The function is first passed a range of points on which to operate. The points must be ordered lexicographically (first by the x coordinate then by y if there is a tie), which they are as this is needed for generating the voronoi structure. A list of zeros, twice the size of the number of points in the range is generated, this list will hold the elements of the chain. The complete convex hull is calculated in two steps, the first finds the upper hull and the second, the lower hull.
+The first centre, $c_0$ which is also the leftmost and the second centre in the range, $c_1$, are both added to the list. We then iterate over the rest of the range, adding the next centre to our list, if the angle created by the three points at the end of the list $c_{j-1}$, $c_j$ and $c_{j+1}$, is less than $\pi$ radians, the three centres are left in the list and the next centre, $c_{j+2}$ is added. If the angle is greater than $\pi$ radians, the two centres at the end of the list, $c_j$ and $c_{j+1}$, are removed and the process continues by adding the next point, $c_{j+2}$. This continues until the rightmost centre, $c_n$, is reached, once this has been achieved, the upper hull of the convex hull has been created.
 \\
-The first point (the leftmost) and the second point in the range are added to the list. We then iterate over the rest of the range, adding the next point to our list, if the angle created by these three points is less than $\pi$ radians, the points are left in the list, the next point in the range is added and the three latest points in the list are analysed for their angle again until we reach the. If the angle is greater than $\pi$ radians, the two latest points in the list are removed and the process continues. This generates the upper hull of the convex hull.
 \\
-To generate the lower hull, the same process is used, but the range is iterated over in reverse, starting at the rightmost point and ending at the leftmost.
-\\
-One the list is populated with the points of the lower and upper hulls, they form the monotone chain. The chain is then iterated over and each point in the chain adds the preceding point to its fifth parameter and the next point to its fourth.
+To generate the lower hull, the same process is used, but the range is iterated over in reverse, starting at the rightmost centre, $c_n$, and ending at the leftmost, $c_0$.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{Images/andrewmonotone.png}
+\caption[]{A convex hull created using Andrew's monotone convex hull algorithm with the upper hull in red and the lower hull in blue\footnotemark.}
+\label{fig:andrewmonotone}
+\end{figure}
+\footnotetext{Taken from \url{https://en.wikibooks.org/wiki/Algorithm_Implementation/Geometry/Convex_hull/Monotone_chain}}
+Once the list has been populated with the centres of the lower and upper hulls, they form the monotone chain. The chain is then iterated over and each centre in the chain adds the preceding centre to its counterclockwise parameter and the next point to its clockwise.
 
 \subsection{Voronoi Merge Function}
-The merge begins by finding the upper and lower tangents of the VDL and VDR sets. These tangent lines are defined as connections between the convex hulls of VDL and VDR with a point in each as the endpoints of the line. Starting from the rightmost point in VDL and the leftmost in VDR, it finds the upper tangent by finding the pair of points (one in VDL and one in VDR) who, together with their respective adjacent points, both generate an angle less than $\pi$ radians, the order and the adjacent point being used is counter-clockwise for VDL and clockwise for VDR. To find the lower tangent, the order is reversed with VDL stepping clockwise and VDR counter-clockwise.
-\\
+The merge begins by finding the upper and lower tangents, $t_u$ and $t_l$ respectively, of the sets $C_L$ and $C_R$. These tangent lines are defined as connections between the convex hulls of $C_L$ and $C_R$ such that they form part of the convex hull of the union of the $C_L$ and $C_R$. Starting from the rightmost centre in $C_L$ and the leftmost centre in $C_R$, it finds the upper tangent by finding two sets of three centes, $(c^L_i,c^L_{i-1},c^R_j)$ and $(c^L_i,c^R_j,C^R_{j+1})$ where $c^L$ and $c^R$ indicate centres in $C_L$ and $C_R$ respectively. These overlapping sets must both satisfy the convex condition, i.e. the angle between these three centres must be less than $\pi$ radians. Once these conditions are met, $t_u$ is created between $C^L_i$ and $C^R_j$. The operation moves counter-clockwise on $C_L$ and clockwise on $C_R$. To find the lower tangent, $t_l$, the order is reversed with $C_L$ stepping clockwise and $C_R$ in counter-clockwise. An example of this can be seen in Figure \ref{fig:v_merge1}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{Images/v_merge1.jpg}
+\caption{Two neighbouring tessellations, $C_L$(red) and $C_R$(blue). Only centres on the convex hulls and their bisecting lines are shown. The upper and lower tangents, $t_u$ and $t_l$ are shown in black}
+\label{fig:v_merge1}
+\end{figure}
 The upper tangent is used to find the starting point of the polygonal chain used to merge the voronoi. Bisector of the endpoints of the line, which both lie on convex hulls, are used as the first line segment in the chain which is appended to a list of lines called HP. The uppermost of the two points in the upper tangent is determined and a new tangent is generated with the lower point and the uppermost point's neighbour, not necessarily in the convex hull, so long as it is not a convex hull neighbour of the lower point and it's related line to the upper point is both available and intercepts the bisector of the upper tangent. The bisecting line of the new point which intercepts the new bisector along with the new bisector itself is added to a list of lines to be clipped, clip\_lines. The same set of operations then occur with the new point and the lower of the upper tangent defining the new tangent. This continues until the bisecting line of the lower tangent is determined. Once complete, we are left with a list, HP, which contains the bisecting lines between points in VDL and VDR and a list of bisecting lines from VDL and VDR together with lines from HP, clip\_lines. The lines in clip\_lines and HP are both cut at their intercepts and all are appended to a list of lines to be passed back along with the range of points and the new convex hull of the combined voronoi structure.
 \\
 \\
