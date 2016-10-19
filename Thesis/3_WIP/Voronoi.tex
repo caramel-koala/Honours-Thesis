@@ -72,40 +72,64 @@ The merge begins by finding the upper and lower tangents, $t_u$ and $t_l$ respec
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.6\textwidth]{Images/v_merge1.jpg}
-\caption{Two neighbouring tessellations, $C_L$(red) and $C_R$(blue). Only centres on the convex hulls and their bisecting lines are shown. The upper and lower tangents, $t_u$ and $t_l$ are shown in black}
+\caption{Two neighbouring tessellations, $C_L$(red) and $C_R$(blue). Only centres affected by the merge on the convex hull and their bisecting lines are shown. The upper and lower tangents, $t_u$ and $t_l$ are shown in black.}
 \label{fig:v_merge1}
 \end{figure}
-The upper tangent is used to find the starting point of the polygonal chain used to merge the voronoi. Bisector of the endpoints of the line, which both lie on convex hulls, are used as the first line segment in the chain which is appended to a list of lines called HP. The uppermost of the two points in the upper tangent is determined and a new tangent is generated with the lower point and the uppermost point's neighbour, not necessarily in the convex hull, so long as it is not a convex hull neighbour of the lower point and it's related line to the upper point is both available and intercepts the bisector of the upper tangent. The bisecting line of the new point which intercepts the new bisector along with the new bisector itself is added to a list of lines to be clipped, clip\_lines. The same set of operations then occur with the new point and the lower of the upper tangent defining the new tangent. This continues until the bisecting line of the lower tangent is determined. Once complete, we are left with a list, HP, which contains the bisecting lines between points in VDL and VDR and a list of bisecting lines from VDL and VDR together with lines from HP, clip\_lines. The lines in clip\_lines and HP are both cut at their intercepts and all are appended to a list of lines to be passed back along with the range of points and the new convex hull of the combined voronoi structure.
-\\
-\\
-An Example of the Voronoi Tessellation can be seen in Figure \ref{fig:gen_voronoi}
+The upper tangent, $t_u$, is used to find the starting point of the polygonal chain used to merge the Voronoi. We start by creating an empty list, $HP$, which will store the line segments of the polygonal chain. The bisector of $t_u$, $b_0$, is used as the first line segment in the polygonal chain and is appended to HP. The endpoint of $t_u$ with the greatest $y$ value is determined, $c^u_0$, and a new tangent is generated with the lower centre, $c^u_1$, and a neighbour of $c^u_0$ in the same subset as $c^u_0$, not necessarily in the convex hull, so long as it the related line to $c^u_0$ is both available and intercepts $b_0$. The bisecting line of the $c^u_0$ and its chosen neighbour is appended to a list of lines which intercepts the polygonal chain, known as \textit{clip\_lines}. The bisector of $c^u_1$ and the chosen neighbour of $c^u_0$ is then determined and appended to $HP$ and the process begins anew. An illustration of a step in the process can be seen in the transition from Figure \ref{fig:v_merge2} to Figure \ref{fig:v_merge3}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{Images/v_merge2.jpg}
+\caption{Two neighbouring Voronoi tessellations merging, the dashed black lines depicting the tangent lines and the solid black line segments depict the growing polygonal chain.}
+\label{fig:v_merge2}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{Images/v_merge3.jpg}
+\caption{Two neighbouring Voronoi tessellations continuing to merging.}
+\label{fig:v_merge3}
+\end{figure}
+This process is repeated until the bisecting line of $t_l$ is determined, this can be seen in Figure \ref{fig:v_merge4}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{Images/v_merge4.jpg}
+\caption{A near complete Voronoi merging process. The lower tangent $t_l$ has been reached by the polygonal chain depicted as solid black line segments.}
+\label{fig:v_merge4}
+\end{figure}
+Once complete, we are left with a list, HP, which contains the bisecting lines between points in $C_L$ and $C_R$ and a list of bisecting lines from $C_L$ and $C_R$, \textit{clip\_lines}. The lines in $HP$ and the centres they bisect are then added to the related lists of each of the centres they bisect. The lines in \textit{clip\_lines} are cut at their intercepts and all are appended to a list of lines to be passed back along with the range of points and the new convex hull of the combined voronoi structure. A depiction of the two Voronois with clipped lines can be seen in Figure \ref{fig:v_merge5}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{Images/v_merge5.jpg}
+\caption{A completed Voronoi merge, with clipped lines to denote the new cell dimensions.}
+\label{fig:v_merge5}
+\end{figure}
+An example of  Voronoi Tessellation can be seen in Figure \ref{fig:gen_voronoi}.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{Images/recentre1.png}
-\caption{A Voronoi tessellation generated by the divide and conquer algorithm.}
+\caption{A Voronoi tessellation generated by the divide and conquer algorithm with sources as circles and stars to represent the Voronoi centres.}
 \label{fig:gen_voronoi}
 \end{figure}
 \subsection{Weighted Voronoi Tessellation}
-An attempt was made to generate a weighted Voronoi tessellation using a distance transform which uses the intensities of the centres to redetermine the coordinates of the midpoint of the centres, this transform can be seen in equation \ref{eq:w_dist} where $z_1$ and $z_2$ are the intensities of $\vec{x_1}$ and $\vec{x_2}$ respectively.
+An attempt was made to generate a weighted Voronoi tessellation using a distance transform which uses the intensities of the centres to redetermine the coordinates of the midpoint of the centres, this transform can be seen in equation \ref{eq:w_dist} where $z_1$ and $z_2$, and $\vec{x_1}$ and $\vec{x_2}$ are the intensities and coordinates of $c_1$ and $c_2$ respectively.
 \begin{equation}\label{eq:w_dist}
-	d'(\vec{x_1},\vec{x_2}) = \frac{z_1}{z_1+z_2}\vec{x_1} + \frac{z_2}{z_1+z_2}\vec{x_2}
+	d'(c_1,c_2) = \frac{z_1}{z_1+z_2}\vec{x_1} + \frac{z_2}{z_1+z_2}\vec{x_2}
 \end{equation}
 This is an extension of the standard distance equation since, if $z_1=z_2$ we obtain
 \begin{align*}
-	d'(\vec{x_1},\vec{x_2}) &= \frac{z_1}{z_1+z_2}\vec{x_1} + \frac{z_2}{z_1+z_2}\vec{x_2} \\
-	d'(\vec{x_1},\vec{x_2}) &= \frac{1}{2}\vec{x_1} + \frac{1}{2}\vec{x_2} \\ 
-	d'(\vec{x_1},\vec{x_2}) &= \frac{\vec{x_1} + \vec{x_2}}{2} \\
+	d'(c_1,c_2) &= \frac{z_1}{z_1+z_2}\vec{x_1} + \frac{z_2}{z_1+z_2}\vec{x_2} \\
+	d'(c_1,c_2) &= \frac{1}{2}\vec{x_1} + \frac{1}{2}\vec{x_2} \\ 
+	d'(c_1,c_2) &= \frac{\vec{x_1} + \vec{x_2}}{2} \\
 \end{align*}
-Some complications were found in this, namely on the convex hull. Weighted centres which are not on the hull but due to their larger weighting still have cells which dominate areas of the hull. This leads to them not being included in the merging process and their line segments not being clipped or deactivated. Another problem with this is that it generates undefined regions in the space, regions where domains overlap due conflicting weightings, an example of this can be seen in Figure \ref{fig:w_voronoi_issue}.
+Some complications were found in this during the voronoi merge process. Weighted centres which are not close enough to the convex hull but due to their larger weighting still have cells which dominate areas of the hull. This leads to them not being included in the merging process and their line segments not being clipped or deactivated. Another problem with this is that it generates undefined regions in the space, regions where domains overlap due conflicting weightings, an example of this can be seen in Figure \ref{fig:w_voronoi_issue}.
 \begin{figure}[H]
 \includegraphics[width=0.5\textwidth]{Images/weighting_problem.png}
 \centering
 \caption{An unclassified area (grey) generated by a weighting conflict in $c_1$ and $c_2$.}
 \label{fig:w_voronoi_issue}
 \end{figure}
-It shows a conflicting area between $c_1$ and $c_2$, it should be expected that $c_2$, with its higher intensity, should claim the area, but in doing so it will cross into what then should be the domain of $c_0$ or $c_3$. It was for this reason that the choice to use the intensities to weight the Voronoi tessellation generated was abandoned and that the intensities would rather be used for calculating the error and calculating cell merges. An example of a failed weighted Voronoi tessellation can be seen in Figure \ref{fig:w_voronoi}.
+It shows a conflicting area between $c_1$ and $c_2$, it should be expected that $c_2$, with its higher intensity, should claim the area, but in doing so it will cross into what then should be the domain of $c_0$ or $c_3$. It was for this reason that the choice to use the intensities to weight the Voronoi tessellation creation process was abandoned and that the intensities would rather be used for calculating the error and determining and calculating cell merges. An example of a failed weighted Voronoi tessellation can be seen in Figure \ref{fig:w_voronoi}.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{Images/weighted_voronoi.png}
 \centering
-\caption{A failed visualisation of a weighted Voronoi tessellation.}
+\caption{A failed visualisation of a weighted Voronoi tessellation with centres in blue, sources in green and centres without cells in red.}
 \label{fig:w_voronoi}
 \end{figure}
