@@ -14,31 +14,49 @@
 \begin{document}
 
 \include{Titlepage}
+
+\include{MISC}
+
 \include{Glossary}
 \tableofcontents
 \printglossaries
-
 
 %Include Chapter 1
 \chapter{Introduction}
 \input{1_Introduction/Introduction}
 
-%Include Chapter 2
 \chapter{Literature Review}
 \input{2_Background/1Intro}
-\include{2_Background/2RA}
-\include{2_Background/3Model}
-\include{2_Background/4GPU}
-\include{2_Background/5Sum}
+\input{2_Background/2RA}
+\input{2_Background/3Model}
+\input{2_Background/4GPU}
+\input{2_Background/5Sum}
 
-%Include Chapter 3
-\chapter{WIP}
+\chapter{Tessellation Algorithm Design}
 \input{3_WIP/Overview}
 \input{3_WIP/Source}
 \input{3_WIP/Voronoi}
 \input{3_WIP/Error}
 \input{3_WIP/Merge}
-\input{3_WIP/GPU}
+
+\chapter{Parallel Implementation of the Tessellation Algorithm}
+\input{4_GPU/GPU}
+\input{4_GPU/Numba}
+\input{4_GPU/Restruct}
+\input{4_GPU/Search}
+\input{4_GPU/DoMerge}
+
+
+\chapter{Results and Discussion}
+\input{5_Results/CellMerge}
+\input{5_Results/Parallel}
+\input{5_Results/GPU}
+
+\chapter{Conclusions}
+\input{6_Con/Summary}
+\input{6_Con/Contrib}
+\input{6_Con/Future}
+
 \bibliography{Thesis_bib}
 \bibliographystyle{ruauthordate}
 
