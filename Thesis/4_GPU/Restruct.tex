@@ -1,7 +1,6 @@
 \section{Data Restructuring}
 The Voronoi data structure, as stated in the previous chapter, consists of centres (Section \ref{sec:design:source}) and lines (Section \ref{sec:des:struct}) linked together by relational centre-line tuples stored in the centre's  list of related centres. While this structure is relatively simple for a sequential CPU system to traverse, GPU's are designed to make use of sequential data readings and therefore traversing a large structure of pointers would be difficult for the GPU to traverse. Increasing the need for a data restructuring is the fact that a structure of values with pointers pointing to different locations in memory can be difficult to transfer to a GPU which is designed to operate on basic data types.
-\\
-\\
+\subsection{Data Selection}
 It was noted that not all of the data from the Voronoi structure would be needed. In order to obtain the best merge, the data that would be needed would be:
 \begin{enumerate}
 \item The location of the centre of the cell.
@@ -10,10 +9,15 @@ It was noted that not all of the data from the Voronoi structure would be needed
 \item The neighbouring cells of the cell.
 \item The sources located in the cell.
 \end{enumerate}
-\\
-\\
 It was therefore determined that three multidimensional arrays would be created to store the necessary data to obtain the best possible merge. Given $n$ centres, the arrays are defined as:
 \begin{enumerate}
-\item An $n\times4$ array of 32 bit floats to store the position, intensity and error of the cell.
-\item An $n \times n$ array of integers storing the
+\item An $n \times 4$ array of 32 bit floats to store the position, intensity and error of the cell.
+\item An $n \times n$ array of integers storing the indexes of the cells to which the cell is related to. The size of the array is large to allow space for cells with a many neighbours and allow for additions of neighbours through merges.
+\item Given $s$ initial sources, an $n \times s \times 3$ array is generated to hold the positions and intensities of the sources in a cell, this array is also set to be large enough to allow for a single cell to hold all the sources should the error be set too high and the merge continue to a single cell.
 \end{enumerate}
+%
+\subsection{Data Transfer}
+The three arrays are defined and populated on the CPU but processed on the GPU. While it is possible to leave the data on the CPU and have Numba dynamically transfer the data between the CPU and GPU with each iteration of the merge test kernel call, since the data is minimally altered with each iteration, it would be more feasible to transfer the data to the GPU once and alter the data on the GPU after each iteration of the merge process.
+\\
+\\
+Data is transferred from the host (CPU) to the device (GPU) using Numba's cuda.to\_ device function and an example of this can be seen in the listing below.
