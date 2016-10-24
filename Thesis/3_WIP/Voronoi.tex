@@ -7,7 +7,7 @@ To satisfy these constraints, the divide and conquer algorithm (Section \ref{tes
 \\
 Code for the Divide and Conquer algorithm was adapted from that in the git repository pyVoronoi\footnote{https://github.com/twmht/pyVoronoi}. pyVoronoi is an implementation for the Divide and Conquer Voronoi algorithm written in Python 2.7. It uses a simple GUI to generate a Voronoi tessellation in a fixed plane using sources read in from a text file. This interface, while simple to use, is constraining as it does not allow users to specify their own spacial constraints or generate the Voronoi as part of a pipelined process. The visualiser and interface were therefore removed and the remaining code re-factored so that the process is a function that can be called by the user or used in a larger process.
 
-\subsection{Structures Used by the Voronoi}
+\subsection{Structures Used by the Voronoi}\label{sec:des:struct}
 The Voronoi structure consists of two main structures, lines and centres. Centres (Section \ref{sec:design:source}) are mainly used to define the sources, but are also used to generate lines.
 \\
 \\

@@ -1,1 +1,19 @@
 \section{Data Restructuring}
+The Voronoi data structure, as stated in the previous chapter, consists of centres (Section \ref{sec:design:source}) and lines (Section \ref{sec:des:struct}) linked together by relational centre-line tuples stored in the centre's  list of related centres. While this structure is relatively simple for a sequential CPU system to traverse, GPU's are designed to make use of sequential data readings and therefore traversing a large structure of pointers would be difficult for the GPU to traverse. Increasing the need for a data restructuring is the fact that a structure of values with pointers pointing to different locations in memory can be difficult to transfer to a GPU which is designed to operate on basic data types.
+\\
+\\
+It was noted that not all of the data from the Voronoi structure would be needed. In order to obtain the best merge, the data that would be needed would be:
+\begin{enumerate}
+\item The location of the centre of the cell.
+\item The intensity of the cell.
+\item The error of the cell.
+\item The neighbouring cells of the cell.
+\item The sources located in the cell.
+\end{enumerate}
+\\
+\\
+It was therefore determined that three multidimensional arrays would be created to store the necessary data to obtain the best possible merge. Given $n$ centres, the arrays are defined as:
+\begin{enumerate}
+\item An $n\times4$ array of 32 bit floats to store the position, intensity and error of the cell.
+\item An $n \times n$ array of integers storing the
+\end{enumerate}
