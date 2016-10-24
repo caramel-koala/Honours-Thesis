@@ -11,13 +11,29 @@ It was noted that not all of the data from the Voronoi structure would be needed
 \end{enumerate}
 It was therefore determined that three multidimensional arrays would be created to store the necessary data to obtain the best possible merge. Given $n$ centres, the arrays are defined as:
 \begin{enumerate}
-\item An $n \times 4$ array of 32 bit floats to store the position, intensity and error of the cell.
-\item An $n \times n$ array of integers storing the indexes of the cells to which the cell is related to. The size of the array is large to allow space for cells with a many neighbours and allow for additions of neighbours through merges.
-\item Given $s$ initial sources, an $n \times s \times 3$ array is generated to hold the positions and intensities of the sources in a cell, this array is also set to be large enough to allow for a single cell to hold all the sources should the error be set too high and the merge continue to a single cell.
+\item An $n \times 4$ array, named texttt{centres}, of 32 bit floats to store the position, intensity and error of the cell.
+\item An $n \times n$ array of integers storing the indexes of the cells to which the cell is related to. The size of the array is large to allow space for cells with a many neighbours and allow for additions of neighbours through merges. The array is named \texttt{related}.
+\item Given $s$ initial sources, an $n \times s \times 3$ array of 32 bit floats is generated to hold the positions and intensities of the sources in a cell, this array is also set to be large enough to allow for a single cell to hold all the sources should the error be set too high and the merge continue to a single cell. The array is named \texttt{sources}.
 \end{enumerate}
-%
+The creation of these arrays can be seen in Listing \ref{gpu:list:array}
+
+\begin{lstlisting}[language=Python, label=gpu:list:array,caption=Array reconstruction for transfer to the GPU.]
+import numpy as np
+
+centre = np.zeros((len(points),4),dtype='float32')
+related = np.zeros((len(points),len(points)),dtype='int32')
+sources = np.zeros((len(points),numobj,3),dtype='float32')
+\end{lstlisting}
+
 \subsection{Data Transfer}
 The three arrays are defined and populated on the CPU but processed on the GPU. While it is possible to leave the data on the CPU and have Numba dynamically transfer the data between the CPU and GPU with each iteration of the merge test kernel call, since the data is minimally altered with each iteration, it would be more feasible to transfer the data to the GPU once and alter the data on the GPU after each iteration of the merge process.
 \\
 \\
-Data is transferred from the host (CPU) to the device (GPU) using Numba's cuda.to\_ device function and an example of this can be seen in the listing below.
+Data is transferred from the host (CPU) to the device (GPU) using Numba's \texttt{cuda.to\_device()} function and an example of this can be seen in Listing \ref{gpu:list:transfer} below.
+\begin{lstlisting}[language=Python, label=gpu:list:transfer,caption=Transferring arrays to GPU.]
+from numba import cuda
+...
+d_centre = cuda.to_device(centre)
+d_related = cuda.to_device(related)
+d_sources = cuda.to_device(sources)
+\end{lstlisting}
