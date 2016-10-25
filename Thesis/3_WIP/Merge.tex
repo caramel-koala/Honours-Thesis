@@ -1,6 +1,6 @@
 \section{Cell Merge}\label{des:sec:merge}
 The merge process is iterative and is dependent on the total sum of the error of the cells, $E$. Initially, this error is relatively low as multiple cells are generated with one or very few sources contained in each cell. To keep the maximum error threshold relative, unless it is given as an input by the user, it is calculated as the product of the set standard deviation ($\sigma$), the size of the plane ($x_{plane},y_{plane}$) and the number of sources in the plane ($|S|$) or 
-\begin{equation}
+\begin{equation}\label{des:eq:maxerr}
  E_{max} = \sigma x_{plane}y_{plane}|S|.
 \end{equation}
 The process begins by summing the errors of the cells and then goes through an iterative process of finding the best merge, checking if implementing the best merge exceeds the maximum error threshold and, if not, implementing the best merge.
