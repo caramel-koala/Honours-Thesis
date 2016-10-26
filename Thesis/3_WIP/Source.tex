@@ -13,7 +13,7 @@ The sources are read in and are used to generate the Voronoi centres. Each centr
 \item The cell's error which is set to zero by default as there are no sources at initialisation.
 \item A list of all the cells that have been merged with this cell; by default, this is also set to none.
 \end{enumerate} 
-Sources are chosen as centres for a Voronoi cell if they have an intensity greater than some predetermined threshold. Once the set of centres, $C= \{c_0,c_1,...,c_n\}$, is created, it is sorted in lexical order i.e. by their $x$ values and then by the $y$ values if the $x$ values are equal. Once the centres have been created, generation of the Voronoi tessellation can begin.
+Sources are chosen as centres for a Voronoi cell if they have an intensity greater than some predetermined threshold. Once the set of centres, $C= \{c_0,c_1,...,c_n\}$, is created, it is sorted in lexical order i.e. by their $x$ values followed by the $y$ values if the $x$ values are equal. Once the centres have been created, generation of the Voronoi tessellation can begin.
 \\
 \\
 For the sake of testing the system, the $x$ and $y$ coordinates of the sources are randomly generated on a $600 \times 600$ plane with the intensities, $z$, randomly generated as the absolute value of a random normal distribution, centred at zero with a standard deviation of $3000$. Using this, $10000$ sources are randomly generated. From these sources, we generate the centres to be used by the Voronoi, where these centres are sources with an intensity greater than one standard deviation of the mean. Since the absolute value of the source intensity is used, this includes all sources with an intensity greater than 3000, thus accounting for approximately $32\%$ of the sources.
