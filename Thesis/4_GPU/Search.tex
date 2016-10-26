@@ -1,5 +1,5 @@
 \section{Parallel Merge Search}
-Once the data arrays have been transferred to the GPU, the iterative merge process can now begin, while similar to the merge described in Section \ref{des:sec:merge}, the GPU merge works by calculating the potential merge of each points with its neighbours simultaneously instead of sequantially as previously described.
+Once the data arrays have been transferred to the GPU, the iterative merge process can now begin, while similar to the merge described in Section \ref{des:sec:merge}, the GPU merge works by calculating the potential merge of each points with its neighbours simultaneously instead of sequentially as previously described.
 \\
 \\
 It begins by generating a grid $\frac{n}{32}+1$ one dimensional blocks each containing 32 threads. It then calls the \texttt{d\_get\_best} kernel to find the best merge. The kernel first uses the \texttt{cuda.grid()} function to obtain the processing threads global ID. It then checks to see if the thread is within the range of the number of cells.
