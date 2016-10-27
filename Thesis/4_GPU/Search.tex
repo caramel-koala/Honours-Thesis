@@ -1,21 +1,21 @@
 \section{Parallel Merge Search}
-Once the data arrays have been transferred to the GPU, the iterative merge process can now begin, while similar to the merge described in Section \ref{des:sec:merge}, the GPU merge works by calculating the potential merge of each points with its neighbours simultaneously instead of sequentially as previously described.
+Once the data arrays have been transferred to the GPU, the iterative merge process can begin. While similar to the merge described in Section \ref{des:sec:merge}, the GPU merge works by calculating the potential merge of each centre with its neighbours simultaneously instead of sequentially as previously described.
 \\
 \\
-It begins by generating a grid $\frac{n}{32}+1$ one dimensional blocks each containing 32 threads. It calls the \texttt{d\_get\_best} kernel to find the best merge. The kernel first uses the \texttt{cuda.grid()} function to obtain the processing threads global ID. It then checks to see if the thread is within the range of the number of cells.
+The parallel algorithm begins by generating a grid of $\frac{n}{32}+1$ one dimensional blocks each containing 32 threads. It then calls the \textit{d\_get\_best} kernel to find the best merge. The kernel first uses the \textit{cuda.grid()} function to obtain the processing thread's global ID. It then checks to see if the thread is within the range of the number of cells.
 \\
 \\
-If the thread is within the range it continues by creating two arrays local to the thread, \texttt{best} and \texttt{test}. If so, it iterates through the corresponding column of the \texttt{related} array and tests the merge using the same testing method as described in Section \ref{des:sec:merge} with output data for each neighbouring point stored in \texttt{test}. If the error of \texttt{test} is found to be lower than that stored in \texttt{best}, which is initialised to contain the maximum threshold error, its values are copued into \texttt{best}, if not, it is overwritten in the next call of the merge test with the next neighbour. The \texttt{test} (and \texttt{best}) arrays are structured as a seven-element array with the follows attributes:
+If the thread is within the range, the kernel continues by creating two arrays local to the thread, named \textit{best} and \textit{test}. It then iterates through the corresponding column of the \textit{d\_related} array. This will allow the centre to be tested for a merge with each of its neighbours. The merge test used for the parallel algorithm is the same as the testing method described in Section \ref{des:sec:merge} with output data for each neighbouring point stored in \textit{test}. If the error of \textit{test} is found to be lower than that stored in \textit{best}, which is initialised to contain the maximum threshold error, its values are copied into \textit{best}. If not, it is overwritten in the next call of the merge test with the next neighbour. The \textit{test} and \textit{best} arrays are structured as a seven-element array with the following attributes:
 \begin{enumerate}
 \item The $x$ coordinate of the merged cell centre.
 \item The $y$ coordinate of the merged cell centre.
-\item The intensity, $z$, coordinate of the merged cell centre.
+\item The intensity, $z$ coordinate, of the merged cell centre.
 \item The total error of the merged cell.
-\item The position of the related cell being tested to merge in the \texttt{centre} array.
-\item The position of the current cell being tested to merge, also the thread ID.
-\item The change in error $\delta$, between the merge tested cell and its parent cells
+\item The position of the related cell being tested to merge in the \textit{d\_centre} array.
+\item The position of the current cell being tested to merge; also the thread ID.
+\item The change in error $\Delta$, between the merged cell and the cells used to create the merged cell, from Equation \ref{des:eq:delta}.
 \end{enumerate}
-Once the best merge for a given cell has been found it is stored in an $n \times 7$ array, \texttt{d\_results} which was created on the GPU before the merge iteration began using the Numba command \texttt{cuda.device\_array()}. The values are stored in the column corresponding to the thread ID. Once all threads have stopped executing by filling the \texttt{d\_result} array with the best merges, \texttt{d\_results} is copied back to the CPU with Numba's \texttt{copy\_to\_host()} function into an array called \texttt{results}.
+Once the best merge for a given cell has been found, it is stored in an $n \times 7$ array, \texttt{d\_results} which was created on the GPU before the merge iteration began using the Numba command \textit{cuda.device\_array()}. The values are stored in the column corresponding to the thread ID. Once all threads have filled in the relevant entries in the \textit{d\_result} array containing the best merges for each centre, \textit{d\_results} is copied back to the CPU using Numba's \textit{copy\_to\_host()} function into an array called \textit{results}.
 \\
 \\
-The array \texttt{results} is iterated over to find the column with the lowest change in error. Once found, the change in error is checked to see that it does not exceed the maximum error threshold, if it does, the execution is halted and the resulting tessellation structure is returned. If the error threshold is not reached, the change in error is added to the value of the tessellations total error and the merge is executed.
+The array \textit{results} is iterated over to find the column with the lowest change in error. Once found, the change in error is checked to see that, when added to the current error of the tessellation, it does not exceed the maximum error threshold; if it does, the execution is halted and the resulting tessellation structure is returned. If the maximum error threshold is not reached, the change in error is added to the total error of the tessellation and the merge is executed.

@@ -37,7 +37,7 @@ This shows that Equation (\ref{eq:merge_centre}) is equivalent to finding the ce
 \\
 \\
 Once the new centre has been found, the error must be determined by summing the square of the weighted distances to the new centre from each source. Once determined, the new centres coordinates and intensity, as well as the new error are returned. The error itself is not compared to find the best merge, but rather the change in error, that is, the merge that produces the lowest increase in the error. This is done by taking the tested merge error and subtracting from it the errors of the centres used to generate it; i.e., we seek $\Delta_{i,j}$ such that for some cells $c_i$ and $c_2j$, the comparison with the error of the merged cell, $c_{i,j}$ is:
-\begin{equation}
+\begin{equation}\label{des:eq:delta}
 	\Delta_{i,j} = \min^n_{i = 1}\min^n_{j = 1, i \neq j}c_{i,j} - (c_i + c_j).
 \end{equation}
 Once found, the result is stored along with the new coordinates of the centre, $c_{i,j}$ and the centres used to generate it.
