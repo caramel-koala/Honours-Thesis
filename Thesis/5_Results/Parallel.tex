@@ -26,7 +26,7 @@ To further analyse the speed-up and provide better insight as to how the paralle
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Images/result_profile.png}
-\caption{Breakdown of the time taken for each subprocess in the parallel merge process.}
+\caption{Breakdown of the time taken for each sub-process in the parallel merge process.}
 \label{res:fig:prof}
 \end{figure}
 Figure \ref{res:fig:prof} shows that, for merges with a smaller number of sources, the transfer time to the GPU is relatively constant, while the merge iteration time and data reshape time scale up appropriately. This constant initial transfer cost is what leads to the sequential process outperforming the parallel for smaller sets of sources. For larger sets of sources, the merge iteration and data reshaping time increases at a much higher rate than that of the data transfer.  This reinforced the parallel implementation as the preferred operation for larger sets of sources.

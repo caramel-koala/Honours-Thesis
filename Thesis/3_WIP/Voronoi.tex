@@ -1,5 +1,5 @@
 \section{Voronoi Tessellation Generation}\label{des:sec:vor}
-The current best model for creating a Voronoi tessellation uses k-means clustering on all the points in a discrete space to the centres. For every point (the plane is seen as a finite number of pixels) in the plane, $p$, it finds the centre, $c_i$, which is the shortest distance from it, i.e. such that $\sqrt{\big(p(x)-c_i(x)\big)^2 + \big(p(y)-c_i(y)\big)^2}$ is minimised. This is suboptimal as the time taken to create the tessellation relies on the dimensions of the plane and the number of centres therein. Instead we seek a method which is invariant of the plane size and relies solely on the centres. For the sake of decreasing the computation time, this method must also be parallelizable. 
+The current best model for creating a Voronoi tessellation uses k-means clustering on all the points in a discrete space to the centres. For every point (the plane is seen as a finite number of pixels) in the plane, $p$, it finds the centre, $c_i$, which is the shortest distance from it, i.e. such that $\sqrt{\big(p(x)-c_i(x)\big)^2 + \big(p(y)-c_i(y)\big)^2}$ is minimised. This is suboptimal as the time taken to create the tessellation relies on the dimensions of the plane and the number of centres therein. Instead we seek a method which is invariant of the plane size and relies solely on the centres. For the sake of decreasing the computation time, this method must also be parallelisable. 
 \\
 \\
 To satisfy these constraints, the divide and conquer algorithm (Section \ref{tes:ssec:dac}) was chosen. The algorithm works by ordering the centres lexicographically and dividing the centres into two subsets, left, $C_L$, and right, $C_R$. The Voronoi tessellations are generated for the left and right subsets separately using the divide and conquer method. The convex hulls of the left and right Voronoi tessellations are then found. The lowest common support line between the hulls is calculated and from this a dividing polygonal chain is generated until it intercepts the upper bounds of the plane. The intersecting edges with the polygonal chain are determined, and lines in the polygonal chain are cut to become part of the Voronoi cells edges.
@@ -17,7 +17,7 @@ A line is made up of the following attributes:
 \item Two centres which the line bisects, which is set to be empty by default.
 \item A centre defining the circumcentre of the line which is empty when the line is created.
 \item A list of all lines connected to this one which is used during the merge of the divide and conquer and is empty by default.
-\item A Boolean value determining whether the line is active or depricated. This is set to true by default, but this is updated when two cells are no longer neighbours, generally due to a merge.
+\item A Boolean value determining whether the line is active or deprecated. This is set to true by default, but this is updated when two cells are no longer neighbours, generally due to a merge.
 \end{enumerate}
 
 \subsection{Voronoi Function}
