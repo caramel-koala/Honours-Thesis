@@ -1,4 +1,4 @@
-This chapter will discuss the design of the tessellation algorithm. It begins by describing the improvements made by implementing the divide and conquer Voronoi algorithm as well as the details of the algorithm itself. It then discusses the error metric which will be used to test the performance of our algorithm and concludes by detailing the cell merge algorithm used to group Voronoi cells to form larger cells.
+This chapter discusses the design of the proposed tessellation algorithm. It begins by describing the improvements made by implementing the divide and conquer Voronoi algorithm as well as the details of the algorithm itself. It then discusses the error metric which is used to test the performance of our algorithm and concludes by detailing the cell merge algorithm used to group Voronoi cells to form larger cells.
 \section{Overview}
 Given a large set ($\sim10000$) of extragalactic sources obtained by aperture synthesis (Section \ref{ra:sec:ic}), an optimal means to tessellate the space containing the sources into facets must be found so that the correction of DD-effects is maximal.
 \\
@@ -9,7 +9,7 @@ A metric is needed to calculate the effectiveness of the algorithm. Since each t
 A Voronoi tessellation (Section \ref{tes:sec:vor}) was used to tessellate the space into cells. However, given the large number of sources, using each source as a centre is suboptimal and defeats the purpose of finding an algorithm which minimises both the error and the number of cells needed, especially considering the large intensity differences in the sources, which can differ in the order of $10^5$ in magnitude. A smaller subset of the sources is therefore used to generate the Voronoi tessellation.
 \\
 \\
-In cases where two large sources are close neighbours of one another, a single larger cell would be preferred over two smaller cells, this would however affect the overall error, $E$, of the tessellation. A merge algorithm was designed and used to find centres with relatively close centres leading to the lowest overall increase in the error. For the sake of the merge algorithm, it is preferable to start with the entire set of sources as centres and merge centres together until the maximum allowed error is reached or the number of cells is minimised.
+In cases where two large sources are close neighbours of one another, a single larger cell would be preferred over two smaller cells; this would however, affect the overall error, $E$, of the tessellation. A merge algorithm was designed and used to find centres with relatively close centres leading to the lowest overall increase in the error. For the sake of the merge algorithm, it is preferable to start with the entire set of sources as centres and merge centres together until the maximum allowed error is reached or the number of cells is minimised.
 \\
 \\
 In the following sections, each of the steps taken in implementing the sequential tessellation algorithm is explained.

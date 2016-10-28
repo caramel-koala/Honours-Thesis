@@ -1,11 +1,11 @@
 \section{Cell Merge}\label{des:sec:merge}
-The merge process is iterative and is dependent on the total sum of the error of the cells, $E$. Initially, this error is relatively low as multiple cells are generated with one or very few sources contained in each cell. To keep the maximum error threshold relative, unless it is given as an input by the user, it is calculated as the product of the set standard deviation ($\sigma$), the size of the plane ($x_{plane},y_{plane}$) and the number of sources in the plane ($|S|$) or 
+The cell merge process is iterative and is dependent on the total sum of the error of the cells, $E$. Initially, this error is relatively low as multiple cells are generated with one or very few sources contained in each cell. To keep the maximum error threshold relative, unless it is given as an input by the user, it is calculated as the product of the set standard deviation ($\sigma$), the size of the plane ($x_{plane},y_{plane}$) and the number of sources in the plane ($|S|$) or 
 \begin{equation}\label{des:eq:maxerr}
  E_{max} = \sigma x_{plane}y_{plane}|S|.
 \end{equation}
 The process begins by summing the errors of the cells and iterates through the process of finding the best merge, checking if implementing the best merge exceeds the maximum error threshold and, if not, implementing the best merge.
 
-\subsection{Obtaining the best merge}
+\subsection{Obtaining the Best Merge}
 The best merge is obtained by iterating over the list of centres and, for each centre, testing it with its active neighbouring centres.
 \\
 \\
@@ -45,7 +45,7 @@ Once found, the result is stored along with the new coordinates of the centre, $
 \\
 Once the best merge has been found, it must be determined whether the new sum of errors exceeds the threshold, i.e. $E + \Delta_{i,j} \geq E_{max}$. If it does, the merge process is halted and the Voronoi structure is returned. If the threshold is set too high, it may occur that all the cells merge into a single cell. In this case, the process is again halted as no best merge could be found as the threshold was set too high for the system. The Voronoi structure is returned as only the set of sources and a single centre with no bisecting lines remaining and so no merged Voronoi can be generated. If the system finds a valid merge which is still less than the threshold, it adds the difference in the merge error to the total error and executes the merge.
 
-\subsection{Executing the merge}
+\subsection{Executing the Merge}
 The merge execution algorithm takes in the new coordinates and intensity, $\vec{X}$, the new error, $Z$, as well as the centre, $c_1$, and the related centre with which it is to be merged, $c_2$. The algorithm starts by setting the coordinates and intensity of $c_1$ to those of $c_{1,2} = (\vec{X},Z)$. It deprecates the line relating $c_1$ to $c_2$ and appends the list of sources in $c_2$ to that of $c_1$. The error of $c_1$, $z_1$, is set to that of the new error, $Z$. Centre $c_2$ and its list of consumed centres are added to the list of consumed centres of $c_1$. Finally, the list of centres is iterated over and any centre which references $c_2$ is changed to reference $c_1$ and all lines which relate other centres to $c_2$ are changed to relate to $c_1$ instead. Once this is complete, the process of finding the best merge restarts until the error threshold is reached.
 \\
 \\

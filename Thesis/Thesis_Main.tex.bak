@@ -7,6 +7,11 @@
 \usepackage[toc]{glossaries} %for glossary
 \usepackage{listings} %for code
 
+\lstset{
+basicstyle=\ttfamily,
+frame=single
+}
+
 \makeglossaries
 
 \begin{document}
