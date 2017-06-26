@@ -1,0 +1,300 @@
+\ifglsentryexists{gpu}{}%
+{%
+\gls@defglossaryentry{gpu}%
+{%
+name={GPU},%
+sort={GPU},%
+type={main},%
+first={Graphical Processing Unit\glsspace (GPU)},%
+firstplural={Graphical Processing Units\glsspace (GPUs)},%
+text={GPU},%
+plural={GPUs},%
+description={Graphical Processing Unit},%
+descriptionplural={Graphical Processing Unit\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Graphical Processing Unit},%
+longplural={Graphical Processing Units},%
+short={GPU},%
+shortplural={GPUs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{di}{}%
+{%
+\gls@defglossaryentry{di}%
+{%
+name={DI},%
+sort={DI},%
+type={main},%
+first={Direction-Independent\glsspace (DI)},%
+firstplural={Direction-Independents\glsspace (DIs)},%
+text={DI},%
+plural={DIs},%
+description={Direction-Independent},%
+descriptionplural={Direction-Independent\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Direction-Independent},%
+longplural={Direction-Independents},%
+short={DI},%
+shortplural={DIs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{dd}{}%
+{%
+\gls@defglossaryentry{dd}%
+{%
+name={DD},%
+sort={DD},%
+type={main},%
+first={Direction-Dependent\glsspace (DD)},%
+firstplural={Direction-Dependents\glsspace (DDs)},%
+text={DD},%
+plural={DDs},%
+description={Direction-Dependent},%
+descriptionplural={Direction-Dependent\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Direction-Dependent},%
+longplural={Direction-Dependents},%
+short={DD},%
+shortplural={DDs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{cpu}{}%
+{%
+\gls@defglossaryentry{cpu}%
+{%
+name={CPU},%
+sort={CPU},%
+type={main},%
+first={Central Processing Unit\glsspace (CPU)},%
+firstplural={Central Processing Units\glsspace (CPUs)},%
+text={CPU},%
+plural={CPUs},%
+description={Central Processing Unit},%
+descriptionplural={Central Processing Unit\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Central Processing Unit},%
+longplural={Central Processing Units},%
+short={CPU},%
+shortplural={CPUs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{gpgpu}{}%
+{%
+\gls@defglossaryentry{gpgpu}%
+{%
+name={GPGPU},%
+sort={GPGPU},%
+type={main},%
+first={General Purpose GPU\glsspace (GPGPU)},%
+firstplural={General Purpose GPUs\glsspace (GPGPUs)},%
+text={GPGPU},%
+plural={GPGPUs},%
+description={General Purpose GPU},%
+descriptionplural={General Purpose GPU\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={General Purpose GPU},%
+longplural={General Purpose GPUs},%
+short={GPGPU},%
+shortplural={GPGPUs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{simd}{}%
+{%
+\gls@defglossaryentry{simd}%
+{%
+name={SIMD},%
+sort={SIMD},%
+type={main},%
+first={Single Instruction Multiple Data\glsspace (SIMD)},%
+firstplural={Single Instruction Multiple Datas\glsspace (SIMDs)},%
+text={SIMD},%
+plural={SIMDs},%
+description={Single Instruction Multiple Data},%
+descriptionplural={Single Instruction Multiple Data\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Single Instruction Multiple Data},%
+longplural={Single Instruction Multiple Datas},%
+short={SIMD},%
+shortplural={SIMDs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{simt}{}%
+{%
+\gls@defglossaryentry{simt}%
+{%
+name={SIMT},%
+sort={SIMT},%
+type={main},%
+first={Single Instruction Multiple Threads\glsspace (SIMT)},%
+firstplural={Single Instruction Multiple Threadss\glsspace (SIMTs)},%
+text={SIMT},%
+plural={SIMTs},%
+description={Single Instruction Multiple Threads},%
+descriptionplural={Single Instruction Multiple Threads\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Single Instruction Multiple Threads},%
+longplural={Single Instruction Multiple Threadss},%
+short={SIMT},%
+shortplural={SIMTs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{gpc}{}%
+{%
+\gls@defglossaryentry{gpc}%
+{%
+name={GPC},%
+sort={GPC},%
+type={main},%
+first={Graphics Processing Cluster\glsspace (GPC)},%
+firstplural={Graphics Processing Clusters\glsspace (GPCs)},%
+text={GPC},%
+plural={GPCs},%
+description={Graphics Processing Cluster},%
+descriptionplural={Graphics Processing Cluster\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Graphics Processing Cluster},%
+longplural={Graphics Processing Clusters},%
+short={GPC},%
+shortplural={GPCs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{sm}{}%
+{%
+\gls@defglossaryentry{sm}%
+{%
+name={SM},%
+sort={SM},%
+type={main},%
+first={Streaming Multiprocessor\glsspace (SM)},%
+firstplural={Streaming Multiprocessors\glsspace (SMs)},%
+text={SM},%
+plural={SMs},%
+description={Streaming Multiprocessor},%
+descriptionplural={Streaming Multiprocessor\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Streaming Multiprocessor},%
+longplural={Streaming Multiprocessors},%
+short={SM},%
+shortplural={SMs},%
+counter={page},%
+parent={},%
+%
+}%
+}%
+\ifglsentryexists{3d}{}%
+{%
+\gls@defglossaryentry{3d}%
+{%
+name={3D},%
+sort={3D},%
+type={main},%
+first={Three Dimensional\glsspace (3D)},%
+firstplural={Three Dimensionals\glsspace (3Ds)},%
+text={3D},%
+plural={3Ds},%
+description={Three Dimensional},%
+descriptionplural={Three Dimensional\acrpluralsuffix },%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Three Dimensional},%
+longplural={Three Dimensionals},%
+short={3D},%
+shortplural={3Ds},%
+counter={page},%
+parent={},%
+%
+}%
+}%

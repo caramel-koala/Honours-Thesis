@@ -1,0 +1,12 @@
+\section{Software for Parallel Implementation}
+Numba is an optimized compiler for Python. Its development project is sponsored by Continuum Analytics and is available either through Continuum's high performance Python distribution platform, Anaconda or by directly downloading the compiler from the site\footnote{http://numba.pydata.org/}.
+\\
+\\
+Numba is optimized for array-based, mathematically intensive code and uses a just-in-time (JIT) compiler to compile code to native machine instructions to produce performance similar to that of C, C++ and Fortran.
+\\
+\\
+GPU support is also included in Numba, as well as an API to interface with NVIDIA's GPU programming language, CUDA.
+\\
+\\
+%\subsection{Numba CUDA}
+Numba is able to convert a strict subset of Python code into CUDA. It allows users to write Python code in a CUDA-like style to create kernels that are executable on the GPU through a CUDA JIT compiler by using the handle \texttt{@cuda.jit}. Numba CUDA is able to interpret simple data structures and \textit{numpy} arrays, which are arrays whose structure is localised to an area of memory for faster access than standard Python lists or tuples. These data structures are passed to and from the GPU dynamically with each kernel call, or explicitly by the user.

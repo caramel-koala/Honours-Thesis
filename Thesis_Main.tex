@@ -1,0 +1,72 @@
+\documentclass{newrucsthesis}
+\usepackage{float} %for placing graphics
+\usepackage{url} %for urls in code and bibliography
+\usepackage{natbib} %for pretty referencing
+\usepackage{caption,subcaption} %for subfigures and such
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage[toc]{glossaries} %for glossary
+\usepackage{listings} %for code
+
+\lstset{
+basicstyle=\ttfamily,
+frame=single
+}
+
+\makeglossaries
+
+\begin{document}
+
+\pagenumbering{roman} 
+\include{Titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{MISC}
+
+\include{Glossary}
+\tableofcontents
+\listoffigures
+\printglossaries
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Introduction}
+\pagenumbering{arabic} 
+\input{1_Introduction/Introduction}
+
+\chapter{Literature Review}
+\input{2_Background/1Intro}
+\input{2_Background/2RA}
+\input{2_Background/3Model}
+\input{2_Background/4GPU}
+\input{2_Background/5Sum}
+
+\chapter{Tessellation Algorithm Design}
+\input{3_WIP/Overview}
+\input{3_WIP/Source}
+\input{3_WIP/Voronoi}
+\input{3_WIP/Error}
+\input{3_WIP/Merge}
+\input{3_WIP/Summary}
+
+\chapter{Parallelising the Tessellation Algorithm}
+\input{4_GPU/GPU}
+\input{4_GPU/Numba}
+\input{4_GPU/Restruct}
+\input{4_GPU/Search}
+\input{4_GPU/DoMerge}
+\input{4_GPU/Problems}
+\input{4_GPU/Summary}
+
+\chapter{Results and Discussion}
+\input{5_Results/Intro}
+\input{5_Results/CellMerge}
+\input{5_Results/Parallel}
+\input{5_Results/Summary}
+
+\chapter{Conclusions}
+\input{6_Con/Summary}
+\input{6_Con/Contrib}
+\input{6_Con/Future}
+
+\addcontentsline{toc}{chapter}{References}   
+\bibliography{Thesis_bib}
+\bibliographystyle{ruauthordate}
+
+\end{document}

@@ -1,0 +1,8 @@
+In this chapter we discuss the literature and resources required to create the sky tessellation algorithm and the techniques that could be used to optimize it. We begin by looking at the background of the problem in radio astronomy. We discuss how radio telescopes work, how the image is created and how \gls{dd} effects occur and how they can be corrected.
+\\
+\\
+We look at Voronoi tessellations, what they are and variations in how they work. We focus especially on Voronoi tessellations of weighted points. Voronoi tessellation algorithms are also explained as well as algorithms for clustering data. Their efficiencies and complexities are also discussed.
+\\
+\\
+Lastly we look at parallelism, the \gls{gpu} architecture and the technicalities of programming on a \gls{gpu}. We discuss the hardware to be used, the NVIDIA GeForce GTX 750 Ti, and the \gls{gpu} programming language CUDA. Various optimizations using CUDA are also covered.
+%--------------------------------------------------------------------------------------
